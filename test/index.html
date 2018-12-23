@@ -32,6 +32,30 @@
 
         // jQuery.noConflict();
 
+        var o = {
+            key1: "val1",
+            key2: "val2",
+            key3: "val3",
+            key4: "val4"
+        };
+
+        $.each($("span"), function(el, i){
+            console.log(i, this);
+        });
+        $.each(o, function(key, val, i){
+            console.log(key, val, i, this);
+        });
+
+        // $.ajax({
+        //     url: "index.html",
+        //     success: function(response){
+        //         console.log(response)
+        //     }
+        // })
+        // $.get("table.json", null, function(response){
+        //     console.log(response);
+        // });
+
         //console.log($('body').children("div"));
 
         // console.log("empty", $(), $());
@@ -45,9 +69,9 @@
         //     console.log("---", this);
         // });
         //
-        $.each($("div"), function(el, index){
-            console.log("---", this.tagName + " #" + index);
-        });
+        // $.each($("div"), function(el, index){
+        //     console.log("---", this.tagName + " #" + index);
+        // });
         //
         // console.log($("section").html());
         // console.log($("section").html());

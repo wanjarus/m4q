@@ -190,9 +190,16 @@
     });
 
     mQuery.each = function(context, callback){
-        [].forEach.call(context, function(el) {
-            callback.apply(el, arguments);
-        });
+        var index = 0;
+        if (context instanceof Object && 'length' in context) {
+            [].forEach.call(context, function(el) {
+                callback.apply(el, arguments);
+            });
+        } else {
+            for(var el in context) {
+                callback.apply(context[el], [el, context[el], index++]);
+            }
+        }
 
         return context;
     };
@@ -200,13 +207,37 @@
     mQuery.ajax = function(params){
         var xhr = new XMLHttpRequest();
 
-        xhr.onload = params.onsuccess;
-        xhr.onerror = params.onerror;
-        xhr.open(params.type, params.url);
-        xhr.send(params.data);
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState !== 4) return;
+            if (xhr.status >= 200 && xhr.status < 300) {
+                if (typeof params.success === "function") params.success(xhr.response, xhr.statusText, xhr);
+            } else {
+                if (typeof params.error === "function") params.error(xhr.status, xhr.statusText);
+            }
+        };
 
-        return this;
+        if (params.headers) {
+            mQuery.each(function(){
+
+            });
+        }
+
+        xhr.open(params.method || 'GET', params.url, true);
+        xhr.send(params.data);
     };
+
+    ['get', 'post', 'put', 'patch', 'delete'].forEach(function(method){
+        mQuery[method] = function(url, data, success, error, dataType){
+            return mQuery.ajax({
+                method: method.toUpperCase(),
+                url: url,
+                data: data,
+                success: success,
+                error: error,
+                dataType: dataType
+            });
+        }
+    });
 
     mQuery.init = function(selector, context){
         var match;
