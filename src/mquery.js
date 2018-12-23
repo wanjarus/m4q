@@ -168,6 +168,30 @@
             return out;
         },
 
+        closest: function(selector){
+            var that = this;
+            var i, out;
+
+            if (this.length === 0 || !selector) {
+                return ;
+            }
+
+            out = mQuery();
+
+            this.items().forEach(function(el){
+                while (el) {
+                    el = el.parentElement;
+                    if (!el) break;
+                    if (matches.call(el, selector)) {
+                        that.merge(out, mQuery(el));
+                        return ;
+                    }
+                }
+            });
+
+            return out;
+        },
+
         each: function(callback){
             [].forEach.call(this, function(el) {
                 callback.apply(el, arguments);

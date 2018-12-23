@@ -20,7 +20,7 @@
     </div>
 
     <div class="class-div" id="id-div-2">
-        <div>
+        <div class="wrap">
             <h1>Title</h1>
             <span>div content 2</span>
             <p>paragraph</p>
@@ -33,7 +33,9 @@
 
         // jQuery.noConflict();
 
-        console.log($("#id-div-2 span").prev("p"));
+        // console.log($("#id-div-2 span").prev("p"));
+
+        console.log($("h1").closest("#id-div-2"));
 
         // $("div").on("click", "h1", function(){
         //     alert("ku");
