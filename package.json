@@ -1,0 +1,32 @@
+{
+  "name": "mquery",
+  "title": "mQuery",
+  "description": "Metro 4 helper for DOM operations",
+  "version": "1.0.0",
+  "main": "build/mquery.js",
+  "homepage": "",
+  "author": {
+    "name": "Sergey Pimenov",
+    "url": "https://pimenov.oom.ua"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olton/mquery.git"
+  },
+  "keywords": [
+    "metro4",
+    "mquery",
+    "javascript",
+    "browser",
+    "library"
+  ],
+  "bugs": {
+    "url": "https://github.com/olton/mquery/issues"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "build": "npm install && grunt",
+    "start": "grunt watch"
+  }
+}
