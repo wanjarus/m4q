@@ -23,6 +23,7 @@
         <div>
             <h1>Title</h1>
             <span>div content 2</span>
+            <p>paragraph</p>
         </div>
     </div>
 
@@ -30,11 +31,15 @@
     <script src="../src/mquery.js"></script>
     <script>
 
-        $("div").on("click", "h1", function(){
-            alert("ku");
-        })
-
         // jQuery.noConflict();
+
+        console.log($("h1").siblings());
+        console.log($("h1").siblings("p"));
+
+        // $("div").on("click", "h1", function(){
+        //     alert("ku");
+        // })
+
 
         // var o = {
         //     key1: "val1",

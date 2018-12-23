@@ -1,4 +1,4 @@
-;(function(win, doc) {
+;(function() {
     "use strict";
 
     var mquery_version = "@VERSION";
@@ -92,6 +92,28 @@
 
         parent: function(){
             return this.length === 0 ? undefined : this[0].parentNode;
+        },
+
+        siblings: function(selector){
+            var that = this;
+            var i, out;
+
+            if (this.length === 0) {
+                return ;
+            }
+
+            out = mQuery();
+
+            this.items().forEach(function(el){
+                var elements = [].filter.call(el.parentNode.children, function(child){
+                    return child !== el && (selector ? matches.call(child, selector) : true);
+                });
+
+                elements.forEach(function(el){
+                    that.merge(out, mQuery(el));
+                })
+            });
+            return out;
         },
 
         each: function(callback){
@@ -297,6 +319,14 @@
         }
     });
 
+    mQuery.ready = function(fn){
+        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    };
+
     mQuery.init = function(selector, context){
         var match;
 
@@ -313,10 +343,10 @@
         if (typeof selector === "string") {
             match = selector.match(/^<(.+?)\/?>$/);
             if (match) {
-                return this.constructor(doc.createElement(match[1]));
+                return this.constructor(document.createElement(match[1]));
             }
 
-            selector = context ? context.querySelectorAll(selector) : doc.querySelectorAll(selector);
+            selector = context ? context.querySelectorAll(selector) : document.querySelectorAll(selector);
         }
 
         [].push.apply(this, selector);
@@ -326,6 +356,6 @@
 
     mQuery.init.prototype = mQuery.fn;
 
-    win.mQuery = win.$ = mQuery;
+    window.mQuery = window.$ = mQuery;
 
-})(window, window.document);
+})();
