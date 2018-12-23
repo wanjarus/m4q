@@ -82,15 +82,16 @@
             return out;
         },
 
+        contains: function(selector){
+
+        },
+
         is: function(selector){
-            var el;
+            return this.length === 0 ? undefined : matches.call(this[0], selector);
+        },
 
-            if (this.length === 0) {
-                return ;
-            }
-            el = this[0];
-
-            return matches.call(el, selector);
+        parent: function(){
+            return this.length === 0 ? undefined : this[0].parentNode;
         },
 
         each: function(callback){
@@ -135,6 +136,10 @@
             return this;
         },
 
+        outerHtml: function(){
+            return this.length === 0 ? undefined : this[0].outerHTML;
+        },
+
         text: function(value){
             var el;
 
@@ -151,6 +156,18 @@
             el.innerText = value;
 
             return this;
+        },
+
+        empty: function(){
+            if (this.length === 0) {
+                return ;
+            }
+
+            return this[0].innerHTML === "";
+        },
+
+        filter: function(filterFunc){
+            return [].filter.call(this, filterFunc);
         },
 
         css: function(o, v){
@@ -172,8 +189,19 @@
         toggleClass: function(){},
         containsClass: function(){},
 
-        on: function(event, delegate, callback){},
+        on: function(event, delegate, callback){
+
+        },
+
         off: function(event, delegate){},
+
+        trigger: function(name, params){
+            var e = new CustomEvent(name, params || {});
+            this.each(function(el){
+                el.dispatchEvent(e);
+            });
+            return this;
+        },
 
         push: [].push,
         sort: [].sort,
@@ -207,8 +235,7 @@
     mQuery.ajax = function(params){
         var xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function(){
-            if (xhr.readyState !== 4) return;
+        xhr.onload = function(){
             if (xhr.status >= 200 && xhr.status < 300) {
                 if (typeof params.success === "function") params.success(xhr.response, xhr.statusText, xhr);
             } else {
@@ -216,9 +243,13 @@
             }
         };
 
-        if (params.headers) {
-            mQuery.each(function(){
+        xhr.onerror = function(){
+            if (typeof params.error === "function") params.error(xhr.status, xhr.statusText);
+        };
 
+        if (params.headers) {
+            mQuery.each(function(name, value){
+                xhr.setRequestHeader(name, value);
             });
         }
 

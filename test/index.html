@@ -32,26 +32,29 @@
 
         // jQuery.noConflict();
 
-        var o = {
-            key1: "val1",
-            key2: "val2",
-            key3: "val3",
-            key4: "val4"
-        };
-
-        $.each($("span"), function(el, i){
-            console.log(i, this);
-        });
-        $.each(o, function(key, val, i){
-            console.log(key, val, i, this);
-        });
+        // var o = {
+        //     key1: "val1",
+        //     key2: "val2",
+        //     key3: "val3",
+        //     key4: "val4"
+        // };
+        //
+        // $.each($("span"), function(el, i){
+        //     console.log(i, this);
+        // });
+        // $.each(o, function(key, val, i){
+        //     console.log(key, val, i, this);
+        // });
 
         // $.ajax({
         //     url: "index.html",
-        //     success: function(response){
-        //         console.log(response)
+        //     success: function(response, status, xhr){
+        //         console.log(response);
+        //     },
+        //     error: function(status){
+        //         console.log(status);
         //     }
-        // })
+        // });
         // $.get("table.json", null, function(response){
         //     console.log(response);
         // });
