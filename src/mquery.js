@@ -199,10 +199,12 @@
 
     mQuery.ajax = function(params){
         var xhr = new XMLHttpRequest();
+
         xhr.onload = params.onsuccess;
         xhr.onerror = params.onerror;
         xhr.open(params.type, params.url);
         xhr.send(params.data);
+
         return this;
     };
 
@@ -235,6 +237,6 @@
 
     mQuery.init.prototype = mQuery.fn;
 
-    win.mQuery = win.M = mQuery;
+    win.mQuery = win.$ = mQuery;
 
 })(window, window.document);
