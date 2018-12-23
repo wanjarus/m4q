@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="metro4:locale" content="ru-RU">
     <title>Title</title>
     <style>
         .new-div {
@@ -15,32 +16,42 @@
 <body>
 
     <div class="class-div" id="id-div">
-        div content
+        <span>div content</span>
     </div>
 
     <div class="class-div" id="id-div-2">
-        div content 2
+        <div>
+            <h1>Title</h1>
+            <span>div content 2</span>
+        </div>
     </div>
 
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="../src/mquery.js"></script>
     <script>
-        console.log("empty", M(), $());
-        console.log("create div", M("<div>"), $("<div>"));
-        console.log("element", M(document.getElementById("id-div")), $(document.getElementById("id-div")));
-        console.log("by tagname", M("div"), $("div"));
-        console.log("by class", M(".class-div"), $(".class-div"));
-        console.log("by id", M("#id-div"), $("#id-div"));
 
-        M("div").each(function(){
-            console.log("---", M(this).text());
+        //console.log(M('body').children("div"));
+
+        // console.log("empty", M(), $());
+        // console.log("create div", M("<div>"), $("<div>"));
+        // console.log("element", M(document.getElementById("id-div")), $(document.getElementById("id-div")));
+        // console.log("by tagname", M("div"), $("div"));
+        // console.log("by class", M(".class-div"), $(".class-div"));
+        // console.log("by id", M("#id-div"), $("#id-div"));
+        //
+        // M("div").each(function(){
+        //     console.log("---", this);
+        // });
+        //
+        M.each(M("div"), function(){
+            console.log("---", this);
         });
-
-        console.log(M("section").html());
-        console.log($("section").html());
-
-        console.log("get attr id: ", M("div").attr("id"));
-        console.log("get attr id: ", M("div").attr("id", "new-id").attr("id"));
+        //
+        // console.log(M("section").html());
+        // console.log($("section").html());
+        //
+        // console.log("get attr id: ", M("div").attr("id"));
+        // console.log("get attr id: ", M("div").attr("id", "new-id").attr("id"));
 
         // M("div").addClass("new-div");
         // setTimeout(function(){
@@ -57,8 +68,10 @@
 
         // console.log(M('body').is('div'));
 
-        console.log(M("body").find("#id-div-2"));
-
+        // console.log(M("body").find("#id-div-2"));
+        //
+        // console.log(M("meta[name='metro4:init']").attr("content"));
+        // console.log(M("meta[name='metro4:locale']").attr("content"));
     </script>
 </body>
 </html>

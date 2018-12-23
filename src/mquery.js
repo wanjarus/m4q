@@ -3,6 +3,13 @@
 
     var mquery_version = "@VERSION";
 
+    var matches = Element.prototype.matches
+        || Element.prototype.matchesSelector
+        || Element.prototype.webkitMatchesSelector
+        || Element.prototype.mozMatchesSelector
+        || Element.prototype.msMatchesSelector
+        || Element.prototype.oMatchesSelector;
+
     var mQuery = function(selector, context){
         return new mQuery.init(selector, context);
     };
@@ -16,6 +23,20 @@
             return target instanceof Object && 'length' in target;
         },
 
+        merge: function( first, second ) {
+            var len = +second.length,
+                j = 0,
+                i = first.length;
+
+            for ( ; j < len; j++ ) {
+                first[ i++ ] = second[ j ];
+            }
+
+            first.length = i;
+
+            return first;
+        },
+
         items: function(){
             var i, out = [];
 
@@ -26,27 +47,53 @@
             return out;
         },
 
-        find: function(selector){
-            return this.length === 0 ? undefined : mQuery(selector, this[0]);
+        get: function(index){
+            if (!index) {
+                return this.items();
+            }
+
+            return index < 0 ? this[ index + this.length ] : this[ index ];
         },
 
-        is: function(selector){
-            var e = Element.prototype;
-            var matches = e.matches || e.matchesSelector || e.webkitMatchesSelector || e.mozMatchesSelector || e.msMatchesSelector || e.oMatchesSelector;
-            var el;
+        find: function(selector){
+            var that = this;
+            var i, out = mQuery();
 
             if (this.length === 0) {
                 return ;
             }
 
+            this.items().forEach(function(el){
+                that.merge(out, mQuery(selector, el.children[i]));
+            });
+            return out;
+        },
+
+        children: function(selector){
+            var that = this;
+            var i, out = mQuery();
+            this.items().forEach(function(el){
+                for(i = 0; i < el.children.length; i++) {
+                    if (matches.call(el.children[i], selector)) {
+                        that.merge(out, mQuery(el.children[i]));
+                    }
+                }
+            });
+            return out;
+        },
+
+        is: function(selector){
+            var el;
+
+            if (this.length === 0) {
+                return ;
+            }
             el = this[0];
 
-            return el.matches(selector);
+            return matches.call(el, selector);
         },
 
         each: function(callback){
-            var i;
-
             [].forEach.call(this, function(el) {
                 callback.apply(el, arguments);
             });
@@ -60,9 +107,7 @@
             if (this.length === 0) {
                return undefined;
             }
-
             el = this[0];
-
             if (!value) {
                 return el.getAttribute(name);
             }
@@ -109,7 +154,6 @@
         },
 
         css: function(o, v){
-
             [].forEach.call(this, function(el) {
                 if (typeof o === "object") {
                     for (var key in o) {
@@ -128,8 +172,8 @@
         toggleClass: function(){},
         containsClass: function(){},
 
-        on: function(){},
-        off: function(){},
+        on: function(event, delegate, callback){},
+        off: function(event, delegate){},
 
         push: [].push,
         sort: [].sort,
@@ -144,6 +188,23 @@
             return this;
         }
     });
+
+    mQuery.each = function(context, callback){
+        [].forEach.call(context, function(el) {
+            callback.apply(el, arguments);
+        });
+
+        return context;
+    };
+
+    mQuery.ajax = function(params){
+        var xhr = new XMLHttpRequest();
+        xhr.onload = params.onsuccess;
+        xhr.onerror = params.onerror;
+        xhr.open(params.type, params.url);
+        xhr.send(params.data);
+        return this;
+    };
 
     mQuery.init = function(selector, context){
         var match;
