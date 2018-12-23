@@ -83,7 +83,7 @@
         },
 
         contains: function(selector){
-
+            return this.find(selector).length > 0;
         },
 
         is: function(selector){
@@ -189,15 +189,42 @@
         toggleClass: function(){},
         containsClass: function(){},
 
-        on: function(event, delegate, callback){
+        on: function(event, selector, handler){
+            if (this.length === 0) {
+                return;
+            }
+            if (typeof selector === "function") {
+                handler = selector;
+                this.items().forEach(function(el){
+                    el.addEventListener(event, handler);
+                });
+            } else {
+                this.find(selector).on(event, handler);
+            }
 
+            return this;
         },
 
-        off: function(event, delegate){},
+        off: function(event, selector){
+            if (this.length === 0) {
+                return;
+            }
+            if (!selector) {
+                this[0].removeEventListener(event);
+            } else {
+                this.find(selector).off(event);
+            }
 
-        trigger: function(name, params){
-            var e = new CustomEvent(name, params || {});
-            this.each(function(el){
+            return this;
+        },
+
+        trigger: function(name, data){
+            var e;
+            if (this.length === 0) {
+                return ;
+            }
+            e = new CustomEvent(name, data || {});
+            this.items().forEach(function(el){
                 el.dispatchEvent(e);
             });
             return this;

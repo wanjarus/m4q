@@ -16,7 +16,7 @@
 <body>
 
     <div class="class-div" id="id-div">
-        <span>div content</span>
+        <span id="span">div content</span>
     </div>
 
     <div class="class-div" id="id-div-2">
@@ -29,6 +29,10 @@
     <!--<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>-->
     <script src="../src/mquery.js"></script>
     <script>
+
+        $("div").on("click", "h1", function(){
+            alert("ku");
+        })
 
         // jQuery.noConflict();
 
@@ -101,6 +105,8 @@
         //
         // console.log($("meta[name='metro4:init']").attr("content"));
         // console.log($("meta[name='metro4:locale']").attr("content"));
+
+        // console.log($("body").contains("#id-div"))
     </script>
 </body>
 </html>
