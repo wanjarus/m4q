@@ -328,6 +328,24 @@
             return this;
         },
 
+        val: function(value){
+            if (this.length === 0) {
+                return ;
+            }
+
+            if (!value) {
+                return this[0].value;
+            }
+
+            this.items().forEach(function(el){
+                if (el.value) {
+                    el.value = value;
+                }
+            });
+
+            return this;
+        },
+
         push: [].push,
         sort: [].sort,
         splice: [].splice
