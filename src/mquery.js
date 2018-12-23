@@ -116,6 +116,58 @@
             return out;
         },
 
+        prev: function(selector){
+            var that = this;
+            var i, out;
+
+            if (this.length === 0) {
+                return ;
+            }
+
+            out = mQuery();
+
+            this.items().forEach(function(el){
+                while (el) {
+                    el = el.previousElementSibling;
+                    if (!el) break;
+                    if (!selector) {
+                        that.merge(out, mQuery(el));
+                    } else {
+                        if (matches.call(el, selector)) {
+                            that.merge(out, mQuery(el));
+                        }
+                    }
+                }
+            });
+            return out;
+        },
+
+        next: function(selector){
+            var that = this;
+            var i, out;
+
+            if (this.length === 0) {
+                return ;
+            }
+
+            out = mQuery();
+
+            this.items().forEach(function(el){
+                while (el) {
+                    el = el.nextElementSibling;
+                    if (!el) break;
+                    if (!selector) {
+                        that.merge(out, mQuery(el));
+                    } else {
+                        if (matches.call(el, selector)) {
+                            that.merge(out, mQuery(el));
+                        }
+                    }
+                }
+            });
+            return out;
+        },
+
         each: function(callback){
             [].forEach.call(this, function(el) {
                 callback.apply(el, arguments);
