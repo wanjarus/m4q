@@ -36,43 +36,40 @@
     <script src="../src/mquery.js"></script>
     <script>
 
-        jQuery.noConflict();
-
         // var html = "<div>\n" +
         //     "<h1>Title</h1>\n" +
         //     "<hr/>\n" +
         //     "<p>Lorem ipsum</p>\n" +
         //     "</div>";
 
-        // console.log(jQuery(html));
-        // console.log($(html));
-        // console.log($("html"));
-        // console.log($.parseHTML(html));
-        // console.log($.parseHTML("html > div"));
+        // console.log($M(html));
+        console.log($M("html"));
+        // console.log($M.parseHTML(html));
+        // console.log($M.parseHTML("html > div"));
 
         // console.log(/^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i.exec(html));
 
-        // console.log($("h1").closest());
-        // console.log($("h1").closest("#id-div-2"));
+        // console.log($M("h1").closest());
+        // console.log($M("h1").closest("#id-div-2"));
 
-        // console.log($("h1").outerHTML());
-        // console.log($("h1").text('Text2'));
-        // console.log($("h1").html());
-        // console.log($("h1").html('Text2'));
+        // console.log($M("h1").outerHTML());
+        // console.log($M("h1").text('Text2'));
+        // console.log($M("h1").html());
+        // console.log($M("h1").html('Text2'));
 
-        //$("span").remove("#span");
+        //$M("span").remove("#span");
 
-        // console.log($("<div><h1>Header</h1><hr/><p>Test</p></div>"));
+        // console.log($M("<div><h1>Header</h1><hr/><p>Test</p></div>"));
 
-        // console.log($("#id-div-2 span").prev("p"));
+        // console.log($M("#id-div-2 span").prev("p"));
 
-        // console.log($("h1").closest("#id-div-2"));
+        // console.log($M("h1").closest("#id-div-2"));
 
-        // console.log($("h1").val(123));
+        // console.log($M("h1").val(123));
 
-        // console.log($("#id-div-2").css("color"))
+        // console.log($M("#id-div-2").css("color"))
 
-        // $("div").on("click", "h1", function(){
+        // $M("div").on("click", "h1", function(){
         //     alert("ku");
         // })
 
@@ -84,7 +81,7 @@
         //     key4: "val4"
         // };
         //
-        // $.each($("span"), function(el, i){
+        // $.each($M("span"), function(el, i){
         //     console.log(i, this);
         // });
         // $.each(o, function(key, val, i){
@@ -104,50 +101,50 @@
         //     console.log(response);
         // });
 
-        //console.log($('body').children("div"));
+        //console.log($M('body').children("div"));
 
-        // console.log("empty", $(), $());
-        // console.log("create div", $("<div>"), $("<div>"));
-        // console.log("element", $(document.getElementById("id-div")), $(document.getElementById("id-div")));
-        // console.log("by tagname", $("div"), $("div"));
-        // console.log("by class", $(".class-div"), $(".class-div"));
-        // console.log("by id", $("#id-div"), $("#id-div"));
+        // console.log("empty", $M(), $());
+        // console.log("create div", $M("<div>"), $("<div>"));
+        // console.log("element", $M(document.getElementById("id-div")), $(document.getElementById("id-div")));
+        // console.log("by tagname", $M("div"), $("div"));
+        // console.log("by class", $M(".class-div"), $(".class-div"));
+        // console.log("by id", $M("#id-div"), $("#id-div"));
         //
-        // $("div").each(function(){
+        // $M("div").each(function(){
         //     console.log("---", this);
         // });
         //
-        // $.each($("div"), function(el, index){
+        // $.each($M("div"), function(el, index){
         //     console.log("---", this.tagName + " #" + index);
         // });
         //
-        // console.log($("section").html());
-        // console.log($("section").html());
+        // console.log($M("section").html());
+        // console.log($M("section").html());
         //
-        // console.log("get attr id: ", $("div").attr("id"));
-        // console.log("get attr id: ", $("div").attr("id", "new-id").attr("id"));
+        // console.log("get attr id: ", $M("div").attr("id"));
+        // console.log("get attr id: ", $M("div").attr("id", "new-id").attr("id"));
 
-        // $("div").addClass("new-div");
+        // $M("div").addClass("new-div");
         // setTimeout(function(){
-        //     $("div").removeClass("new-div");
+        //     $M("div").removeClass("new-div");
         // }, 2000);
         // setTimeout(function(){
-        //     $("div").toggleClass("new-div-2");
+        //     $M("div").toggleClass("new-div-2");
         // }, 4000)
 
-        // $("div").css({
+        // $M("div").css({
         //     color: "red"
         // });
-        // $("div").css("color", "blue");
+        // $M("div").css("color", "blue");
 
-        // console.log($('body').is('div'));
+        // console.log($M('body').is('div'));
 
-        // console.log($("body").find("#id-div-2"));
+        // console.log($M("body").find("#id-div-2"));
         //
-        // console.log($("meta[name='metro4:init']").attr("content"));
-        // console.log($("meta[name='metro4:locale']").attr("content"));
+        // console.log($M("meta[name='metro4:init']").attr("content"));
+        // console.log($M("meta[name='metro4:locale']").attr("content"));
 
-        // console.log($("body").contains("#id-div"))
+        // console.log($M("body").contains("#id-div"))
     </script>
 </body>
 </html>

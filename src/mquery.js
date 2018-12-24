@@ -386,6 +386,7 @@
         }
     });
 
+    // TODO add scripts support
     mQuery.parseHTML = function(data, context){
         var base, singleTag;
 
@@ -510,6 +511,6 @@
 
     mQuery.init.prototype = mQuery.fn;
 
-    window.mQuery = window.$ = mQuery;
+    window.mQuery = window.$M = mQuery;
 
 })();
