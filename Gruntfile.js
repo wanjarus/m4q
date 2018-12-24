@@ -23,8 +23,8 @@ module.exports = function(grunt) {
         concat: {
             js: {
                 options: {
-                    banner: '<%= banner %>',
-                    footer: "",
+                    banner: '<%= banner %>' + "\n\n" + ";(function() {\n",
+                    footer: "})();\n",
                     stripBanners: true
                 },
                 src: [

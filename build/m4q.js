@@ -3,7 +3,10 @@
  * Copyright 2018 - 2018 by Sergey Pimenov
  * Licensed under MIT
  */
+
+
 ;(function() {
+
     "use strict";
 
     var m4qVersion = "@VERSION";

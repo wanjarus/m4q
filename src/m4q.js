@@ -1,4 +1,4 @@
-;(function() {
+
     "use strict";
 
     var m4qVersion = "@VERSION";
@@ -513,4 +513,3 @@
 
     window.m4q = window.$M = m4q;
 
-})();
