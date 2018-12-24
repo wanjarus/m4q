@@ -32,14 +32,25 @@
         <input type="text" name="username" value="123">
     </form>
 
-    <!--<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>-->
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="../src/mquery.js"></script>
     <script>
 
-        // jQuery.noConflict();
+        jQuery.noConflict();
 
-        console.log($("h1").closest());
-        console.log($("h1").closest("#id-div-2"));
+        var html = "<div>\n" +
+            "<h1>Title</h1>\n" +
+            "<hr/>\n" +
+            "<p>Lorem ipsum</p>\n" +
+            "</div>";
+
+        // console.log(jQuery(html));
+        console.log($.parseHTML(html));
+
+        // console.log(/^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i.exec(html));
+
+        // console.log($("h1").closest());
+        // console.log($("h1").closest("#id-div-2"));
 
         // console.log($("h1").outerHTML());
         // console.log($("h1").text('Text2'));

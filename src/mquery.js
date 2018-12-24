@@ -1,7 +1,8 @@
 ;(function() {
     "use strict";
 
-    var mquery_version = "@VERSION";
+    var mQueryVersion = "@VERSION";
+    var regexpSingleTag = /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i;
 
     var matches = Element.prototype.matches
         || Element.prototype.matchesSelector
@@ -15,7 +16,7 @@
     };
 
     mQuery.fn = mQuery.prototype = {
-        mquery: mquery_version,
+        mquery: mQueryVersion,
         constructor: mQuery,
         length: 0,
 
@@ -353,12 +354,6 @@
             return this;
         },
 
-        parseHTML: function(str){
-            var doc = document.implementation.createHTMLDocument();
-            doc.body.innerHTML = str;
-            return doc.body.children;
-        },
-
         remove: function(selector){
             var i = 0, node, out = [];
 
@@ -390,6 +385,33 @@
             return this;
         }
     });
+
+    mQuery.parseHTML = function(data, context){
+        var base, singleTag;
+
+        if (typeof data !== "string") {
+            return [];
+        }
+
+        if (!context) {
+            context = document.implementation.createHTMLDocument();
+            base = context.createElement( "base" );
+            base.href = document.location.href;
+            context.head.appendChild( base );
+        }
+
+        singleTag = regexpSingleTag.exec(data);
+
+        if (singleTag) {
+            return [context.createElement(singleTag[1])];
+        }
+
+        context = context.body ? context.body : context;
+
+        context.innerHTML = data;
+
+        return mQuery().merge([], context.childNodes);
+    };
 
     mQuery.each = function(context, callback){
         var index = 0;
@@ -453,7 +475,7 @@
     };
 
     mQuery.init = function(selector, context){
-        var match;
+        var match, singleTag;
 
         if (!selector) {
             return this;
@@ -466,10 +488,14 @@
         }
 
         if (typeof selector === "string") {
-            match = selector.match(/^<(.+?)\/?>$/);
-            if (match) {
-                return this.constructor(document.createElement(match[1]));
+
+            singleTag = regexpSingleTag.exec(selector);
+
+            if (singleTag) {
+                return mQuery((context ? context : document).createElement(singleTag[1]));
             }
+
+            mQuery().merge(this, mQuery.parseHTML(selector, context));
 
             selector = context ? context.querySelectorAll(selector) : document.querySelectorAll(selector);
         }
