@@ -27,10 +27,6 @@ m4q.fn = m4q.prototype = {
     constructor: m4q,
     length: 0,
 
-    isArrayLike: function(target){
-        return target instanceof Object && 'length' in target;
-    },
-
     items: function(){
         var i, out = [];
 
@@ -420,7 +416,7 @@ m4q.parseHTML = function(data, context){
 
 m4q.each = function(context, callback){
     var index = 0;
-    if (context instanceof Object && 'length' in context) {
+    if (m4q.isArrayLike(context)) {
         [].forEach.call(context, function(el) {
             callback.apply(el, arguments);
         });
@@ -493,6 +489,10 @@ m4q.merge = function( first, second ) {
     return first;
 };
 
+m4q.isArrayLike = function(target){
+    return target instanceof Object && 'length' in target;
+};
+
 m4q.init = function(selector, context){
     var parsed, singleTag;
 
@@ -516,7 +516,7 @@ m4q.init = function(selector, context){
 
         parsed = m4q.parseHTML(selector, context);
 
-        if (parsed[0].nodeType === 3) {
+        if (parsed.length === 1 && parsed[0].nodeType === 3) {
             selector = context ? context.querySelectorAll(selector) : document.querySelectorAll(selector);
             [].push.apply(this, selector);
         } else {
