@@ -25,8 +25,7 @@
     "url": "https://github.com/olton/m4q/issues"
   },
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
     "build": "npm install && grunt",
     "start": "grunt watch"
