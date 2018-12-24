@@ -1,5 +1,6 @@
-# DOM manipulation helper
+# m4q - DOM manipulation helper
 
+The m4q is a small library for DOM manipulation. 
 This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQuery.
  
 ## Version 1.0.0

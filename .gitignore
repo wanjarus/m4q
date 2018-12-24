@@ -11,3 +11,4 @@ tmp-*-repo/
 coverage/
 .idea
 .vs/
+*.bat
