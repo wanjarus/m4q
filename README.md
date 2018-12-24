@@ -1,6 +1,6 @@
 # DOM manipulation helper
 
-This helper designed for Metro 4 project to replace jQuery.
+This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQuery.
  
 ## Version 1.0.0
 
