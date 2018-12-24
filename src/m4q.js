@@ -174,3 +174,6 @@ m4q.isArrayLike = function(target){
     return target instanceof Object && 'length' in target;
 };
 
+m4q.type = function(obj){
+    return Object.prototype.toString.call(obj).replace(/^\[object (.+)]$/, '$1').toLowerCase();
+};
