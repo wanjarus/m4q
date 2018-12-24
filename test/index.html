@@ -19,7 +19,7 @@
         <span id="span">div content</span>
     </div>
 
-    <div class="class-div" id="id-div-2">
+    <div class="new-div-2" id="id-div-2" style="color: red">
         <div class="wrap">
             <h1>Title</h1>
             <span>div content 2</span>
@@ -38,11 +38,25 @@
 
         // jQuery.noConflict();
 
+        console.log($("h1").closest());
+        console.log($("h1").closest("#id-div-2"));
+
+        // console.log($("h1").outerHTML());
+        // console.log($("h1").text('Text2'));
+        // console.log($("h1").html());
+        // console.log($("h1").html('Text2'));
+
+        //$("span").remove("#span");
+
+        // console.log($("<div><h1>Header</h1><hr/><p>Test</p></div>"));
+
         // console.log($("#id-div-2 span").prev("p"));
 
         // console.log($("h1").closest("#id-div-2"));
 
-        console.log($("h1").val(123));
+        // console.log($("h1").val(123));
+
+        // console.log($("#id-div-2").css("color"))
 
         // $("div").on("click", "h1", function(){
         //     alert("ku");

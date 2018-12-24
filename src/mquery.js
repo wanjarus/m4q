@@ -74,12 +74,12 @@
             var i, out = mQuery();
             this.items().forEach(function(el){
                 for(i = 0; i < el.children.length; i++) {
-                    if (matches.call(el.children[i], selector)) {
-                        that.merge(out, mQuery(el.children[i]));
-                    }
+                    that.merge(out, mQuery(el.children[i]));
                 }
             });
-            return out;
+            return selector ? out.filter(function(el){
+                return matches.call(el, selector);
+            }) : out;
         },
 
         contains: function(selector){
@@ -90,13 +90,25 @@
             return this.length === 0 ? undefined : matches.call(this[0], selector);
         },
 
-        parent: function(){
-            return this.length === 0 ? undefined : this[0].parentNode;
+        parent: function(selector){
+            var that = this;
+            var i, out = mQuery();
+            if (this.length === 0) {
+                return;
+            }
+            this.items().forEach(function(el){
+                if (el.parentNode) {
+                    that.merge(out, mQuery(el.parentNode));
+                }
+            });
+            return selector ? out.filter(function(el){
+                return matches.call(el, selector);
+            }) : out;
         },
 
         siblings: function(selector){
             var that = this;
-            var i, out;
+            var i, out = mQuery();
 
             if (this.length === 0) {
                 return ;
@@ -118,7 +130,7 @@
 
         prev: function(selector){
             var that = this;
-            var i, out;
+            var i, out = mQuery();
 
             if (this.length === 0) {
                 return ;
@@ -144,7 +156,7 @@
 
         next: function(selector){
             var that = this;
-            var i, out;
+            var i, out = mQuery();
 
             if (this.length === 0) {
                 return ;
@@ -170,10 +182,14 @@
 
         closest: function(selector){
             var that = this;
-            var i, out;
+            var i, out = mQuery();
 
-            if (this.length === 0 || !selector) {
+            if (this.length === 0) {
                 return ;
+            }
+
+            if (!selector) {
+                return this.parent(selector);
             }
 
             out = mQuery();
@@ -216,44 +232,29 @@
             return this;
         },
 
-        html: function(value){
-            var el;
-
+        _property: function(property, value){
             if (this.length === 0) {
                 return ;
             }
-
-            el = this[0];
-
             if (!value) {
-                return el.innerHTML;
+                return this[0][property];
             }
 
-            el.innerHTML = value;
+            this[0][property] = value;
 
             return this;
         },
 
-        outerHtml: function(){
-            return this.length === 0 ? undefined : this[0].outerHTML;
+        outerHTML: function(){
+            return this._property('outerHTML');
+        },
+
+        html: function(value){
+            return this._property('innerHTML', value);
         },
 
         text: function(value){
-            var el;
-
-            if (this.length === 0) {
-                return ;
-            }
-
-            el = this[0];
-
-            if (!value) {
-                return el.innerText;
-            }
-
-            el.innerText = value;
-
-            return this;
+            return this._property('innerText', value);
         },
 
         empty: function(){
@@ -269,15 +270,21 @@
         },
 
         css: function(o, v){
-            [].forEach.call(this, function(el) {
+            var i, win, el;
+
+            for(i = 0; i < this.length; i++) {
+                el = this[i];
                 if (typeof o === "object") {
                     for (var key in o) {
                         el.style[key] = o[key];
                     }
                 } else if (typeof o === "string" && v !== undefined) {
                     el.style[o] = v;
+                } else if (typeof o === "string" && !v) {
+                    win = el.ownerDocument.defaultView;
+                    return  el.style[o] ?  el.style[o] : win.getComputedStyle(el, null)[o];
                 }
-            });
+            }
 
             return this;
         },
@@ -344,6 +351,30 @@
             });
 
             return this;
+        },
+
+        parseHTML: function(str){
+            var doc = document.implementation.createHTMLDocument();
+            doc.body.innerHTML = str;
+            return doc.body.children;
+        },
+
+        remove: function(selector){
+            var i = 0, node, out = [];
+
+            if (this.length === 0) {
+                return ;
+            }
+
+            for ( ; ( node = this[ i ] ) != null; i++ ) {
+                if (node.parentNode) {
+                    out.push(node.parentNode.removeChild(node));
+                }
+            }
+
+            return selector ? out.filter(function(el){
+                return matches.call(el, selector);
+            }) : out;
         },
 
         push: [].push,
