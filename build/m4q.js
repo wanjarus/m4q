@@ -1,9 +1,9 @@
 /*
  * m4q v1.0.0 (https://github.com/olton/m4q.git)
  * Copyright 2018 - 2018 by Sergey Pimenov
+ * Helper for DOM manipulation for Metro 4 library
  * Licensed under MIT
  */
-
 
 ;(function() {
 

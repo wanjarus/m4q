@@ -1,7 +1,7 @@
 {
   "name": "m4q",
   "title": "m4q",
-  "description": "Helper for DOM operations",
+  "description": "Helper for DOM manipulation for Metro 4 library",
   "version": "1.0.0",
   "main": "build/m4q.js",
   "homepage": "",

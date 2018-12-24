@@ -13,6 +13,7 @@ module.exports = function(grunt) {
         banner: '/*\n' +
             ' * m4q v<%= pkg.version %> (<%= pkg.repository.url %>)\n' +
             ' * Copyright 2018 - <%= grunt.template.today("yyyy") %> by <%= pkg.author.name %>\n' +
+            ' * <%= pkg.description %>\n' +
             ' * Licensed under <%= pkg.license %>\n' +
             ' */\n',
 
@@ -23,7 +24,7 @@ module.exports = function(grunt) {
         concat: {
             js: {
                 options: {
-                    banner: '<%= banner %>' + "\n\n" + ";(function() {\n",
+                    banner: '<%= banner %>' + "\n" + ";(function() {\n",
                     footer: "})();\n",
                     stripBanners: true
                 },
