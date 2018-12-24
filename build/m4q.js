@@ -1,12 +1,12 @@
 /*
- * mQuery v1.0.0 (https://github.com/olton/mquery.git)
- * Copyright 2018 by Sergey Pimenov
+ * m4q v1.0.0 (https://github.com/olton/m4q.git)
+ * Copyright 2018 - 2018 by Sergey Pimenov
  * Licensed under MIT
  */
 ;(function() {
     "use strict";
 
-    var mQueryVersion = "@VERSION";
+    var m4qVersion = "@VERSION";
     var regexpSingleTag = /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i;
 
     var matches = Element.prototype.matches
@@ -16,13 +16,13 @@
         || Element.prototype.msMatchesSelector
         || Element.prototype.oMatchesSelector;
 
-    var mQuery = function(selector, context){
-        return new mQuery.init(selector, context);
+    var m4q = function(selector, context){
+        return new m4q.init(selector, context);
     };
 
-    mQuery.fn = mQuery.prototype = {
-        mquery: mQueryVersion,
-        constructor: mQuery,
+    m4q.fn = m4q.prototype = {
+        m4q: m4qVersion,
+        constructor: m4q,
         length: 0,
 
         isArrayLike: function(target){
@@ -63,24 +63,24 @@
 
         find: function(selector){
             var that = this;
-            var i, out = mQuery();
+            var i, out = m4q();
 
             if (this.length === 0) {
                 return ;
             }
 
             this.items().forEach(function(el){
-                that.merge(out, mQuery(selector, el.children[i]));
+                that.merge(out, m4q(selector, el.children[i]));
             });
             return out;
         },
 
         children: function(selector){
             var that = this;
-            var i, out = mQuery();
+            var i, out = m4q();
             this.items().forEach(function(el){
                 for(i = 0; i < el.children.length; i++) {
-                    that.merge(out, mQuery(el.children[i]));
+                    that.merge(out, m4q(el.children[i]));
                 }
             });
             return selector ? out.filter(function(el){
@@ -98,13 +98,13 @@
 
         parent: function(selector){
             var that = this;
-            var i, out = mQuery();
+            var i, out = m4q();
             if (this.length === 0) {
                 return;
             }
             this.items().forEach(function(el){
                 if (el.parentNode) {
-                    that.merge(out, mQuery(el.parentNode));
+                    that.merge(out, m4q(el.parentNode));
                 }
             });
             return selector ? out.filter(function(el){
@@ -114,13 +114,13 @@
 
         siblings: function(selector){
             var that = this;
-            var i, out = mQuery();
+            var i, out = m4q();
 
             if (this.length === 0) {
                 return ;
             }
 
-            out = mQuery();
+            out = m4q();
 
             this.items().forEach(function(el){
                 var elements = [].filter.call(el.parentNode.children, function(child){
@@ -128,7 +128,7 @@
                 });
 
                 elements.forEach(function(el){
-                    that.merge(out, mQuery(el));
+                    that.merge(out, m4q(el));
                 })
             });
             return out;
@@ -136,23 +136,23 @@
 
         prev: function(selector){
             var that = this;
-            var i, out = mQuery();
+            var i, out = m4q();
 
             if (this.length === 0) {
                 return ;
             }
 
-            out = mQuery();
+            out = m4q();
 
             this.items().forEach(function(el){
                 while (el) {
                     el = el.previousElementSibling;
                     if (!el) break;
                     if (!selector) {
-                        that.merge(out, mQuery(el));
+                        that.merge(out, m4q(el));
                     } else {
                         if (matches.call(el, selector)) {
-                            that.merge(out, mQuery(el));
+                            that.merge(out, m4q(el));
                         }
                     }
                 }
@@ -162,23 +162,23 @@
 
         next: function(selector){
             var that = this;
-            var i, out = mQuery();
+            var i, out = m4q();
 
             if (this.length === 0) {
                 return ;
             }
 
-            out = mQuery();
+            out = m4q();
 
             this.items().forEach(function(el){
                 while (el) {
                     el = el.nextElementSibling;
                     if (!el) break;
                     if (!selector) {
-                        that.merge(out, mQuery(el));
+                        that.merge(out, m4q(el));
                     } else {
                         if (matches.call(el, selector)) {
-                            that.merge(out, mQuery(el));
+                            that.merge(out, m4q(el));
                         }
                     }
                 }
@@ -188,7 +188,7 @@
 
         closest: function(selector){
             var that = this;
-            var i, out = mQuery();
+            var i, out = m4q();
 
             if (this.length === 0) {
                 return ;
@@ -198,14 +198,14 @@
                 return this.parent(selector);
             }
 
-            out = mQuery();
+            out = m4q();
 
             this.items().forEach(function(el){
                 while (el) {
                     el = el.parentElement;
                     if (!el) break;
                     if (matches.call(el, selector)) {
-                        that.merge(out, mQuery(el));
+                        that.merge(out, m4q(el));
                         return ;
                     }
                 }
@@ -383,7 +383,7 @@
     };
 
     ['add', 'remove', 'toggle', 'contains'].forEach(function (method) {
-        mQuery.prototype[method + "Class"] = function(cls){
+        m4q.prototype[method + "Class"] = function(cls){
             for(var i = 0 ; i < this.length; i++) {
                 this[i].classList[method](cls);
             }
@@ -392,7 +392,7 @@
     });
 
     // TODO add scripts support
-    mQuery.parseHTML = function(data, context){
+    m4q.parseHTML = function(data, context){
         var base, singleTag;
 
         if (typeof data !== "string") {
@@ -416,10 +416,10 @@
 
         context.innerHTML = data;
 
-        return mQuery().merge([], context.childNodes);
+        return m4q().merge([], context.childNodes);
     };
 
-    mQuery.each = function(context, callback){
+    m4q.each = function(context, callback){
         var index = 0;
         if (context instanceof Object && 'length' in context) {
             [].forEach.call(context, function(el) {
@@ -434,7 +434,7 @@
         return context;
     };
 
-    mQuery.ajax = function(params){
+    m4q.ajax = function(params){
         var xhr = new XMLHttpRequest();
 
         xhr.onload = function(){
@@ -450,7 +450,7 @@
         };
 
         if (params.headers) {
-            mQuery.each(function(name, value){
+            m4q.each(function(name, value){
                 xhr.setRequestHeader(name, value);
             });
         }
@@ -460,8 +460,8 @@
     };
 
     ['get', 'post', 'put', 'patch', 'delete'].forEach(function(method){
-        mQuery[method] = function(url, data, success, error, dataType){
-            return mQuery.ajax({
+        m4q[method] = function(url, data, success, error, dataType){
+            return m4q.ajax({
                 method: method.toUpperCase(),
                 url: url,
                 data: data,
@@ -472,7 +472,7 @@
         }
     });
 
-    mQuery.ready = function(fn){
+    m4q.ready = function(fn){
         if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
             fn();
         } else {
@@ -480,7 +480,7 @@
         }
     };
 
-    mQuery.init = function(selector, context){
+    m4q.init = function(selector, context){
         var parsed, singleTag;
 
         if (!selector) {
@@ -498,24 +498,24 @@
             singleTag = regexpSingleTag.exec(selector);
 
             if (singleTag) {
-                return mQuery((context ? context : document).createElement(singleTag[1]));
+                return m4q((context ? context : document).createElement(singleTag[1]));
             }
 
-            parsed = mQuery.parseHTML(selector, context);
+            parsed = m4q.parseHTML(selector, context);
 
             if (parsed[0].nodeType === 3) {
                 selector = context ? context.querySelectorAll(selector) : document.querySelectorAll(selector);
                 [].push.apply(this, selector);
             } else {
-                mQuery().merge(this, parsed);
+                m4q().merge(this, parsed);
             }
         }
 
         return this;
     };
 
-    mQuery.init.prototype = mQuery.fn;
+    m4q.init.prototype = m4q.fn;
 
-    window.mQuery = window.$M = mQuery;
+    window.m4q = window.$M = m4q;
 
 })();

@@ -1,9 +1,9 @@
 {
-  "name": "mquery",
-  "title": "mQuery",
+  "name": "m4q",
+  "title": "m4q",
   "description": "Helper for DOM operations",
   "version": "1.0.0",
-  "main": "build/mquery.js",
+  "main": "build/m4q.js",
   "homepage": "",
   "author": {
     "name": "Sergey Pimenov",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/olton/mquery.git"
+    "url": "https://github.com/olton/m4q.git"
   },
   "keywords": [
     "metro4",
@@ -22,7 +22,7 @@
     "dom"
   ],
   "bugs": {
-    "url": "https://github.com/olton/mquery/issues"
+    "url": "https://github.com/olton/m4q/issues"
   },
   "license": "MIT",
   "dependencies": {

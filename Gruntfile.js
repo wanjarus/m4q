@@ -11,8 +11,8 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         banner: '/*\n' +
-            ' * mQuery v<%= pkg.version %> (<%= pkg.repository.url %>)\n' +
-            ' * Copyright <%= grunt.template.today("yyyy") %> by <%= pkg.author.name %>\n' +
+            ' * m4q v<%= pkg.version %> (<%= pkg.repository.url %>)\n' +
+            ' * Copyright 2018 - <%= grunt.template.today("yyyy") %> by <%= pkg.author.name %>\n' +
             ' * Licensed under <%= pkg.license %>\n' +
             ' */\n',
 
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
                 src: [
                     'src/*.js'
                 ],
-                dest: 'build/mQuery.js'
+                dest: 'build/m4q.js'
             }
         },
 
@@ -40,8 +40,8 @@ module.exports = function(grunt) {
                 preserveComments: false
             },
             core: {
-                src: 'build/mQuery.js',
-                dest: 'build/mQuery.min.js'
+                src: 'build/m4q.js',
+                dest: 'build/m4q.min.js'
             }
         },
 

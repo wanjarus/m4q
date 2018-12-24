@@ -9,4 +9,3 @@ This helper designed for Metro 4 project to replace jQuery.
 [![devDependencies Status](https://david-dm.org/olton/Metro-UI-CSS/dev-status.svg)](https://david-dm.org/olton/mquery?type=dev)
 [![JS gzip size](http://img.badgesize.io/olton/mquery/master/build/mQuery.min.js?compression=gzip&label=JS+gzip)](https://github.com/olton/mquery/blob/master/build/mquery.min.js)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/olton/mquery/blob/master/LICENSE)
-[![npm version](https://badge.fury.io/js/mquery.svg)](https://badge.fury.io/js/mquery)
