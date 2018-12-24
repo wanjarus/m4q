@@ -25,11 +25,26 @@ module.exports = function(grunt) {
             js: {
                 options: {
                     banner: '<%= banner %>' + "\n" + ";(function() {\n",
-                    footer: "})();\n",
-                    stripBanners: true
+                    footer: "\n\treturn m4q; \n})();\n",
+                    stripBanners: true,
+                    process: function(src, filepath) {
+                        return src.replace(/\n/g, '\n\t');
+                    }
                 },
                 src: [
-                    'src/*.js'
+                    'src/mode.js',
+                    'src/m4q.js',
+                    'src/events.js',
+                    'src/html.js',
+                    'src/ajax.js',
+                    'src/css.js',
+                    'src/each.js',
+                    'src/parseHTML.js',
+                    'src/size.js',
+                    'src/search.js',
+                    'src/attr.js',
+                    'src/init.js',
+                    'src/populate.js'
                 ],
                 dest: 'build/m4q.js'
             }

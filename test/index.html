@@ -36,14 +36,17 @@
     <script src="../build/m4q.js"></script>
     <script>
 
+        $M("#id-div").clearClasses();
+        $M("#id-div").addClass("class-div-add");
+
         // var html = "<div>\n" +
         //     "<h1>Title</h1>\n" +
         //     "<hr/>\n" +
         //     "<p>Lorem ipsum</p>\n" +
         //     "</div>";
 
-        console.log($M(".wrap span").prev());
-        console.log($M(".wrap span").next());
+        // console.log($M(".wrap").html());
+        // console.log($M(".wrap").text());
 
         // console.log($M(html));
         // console.log($M("body"));
@@ -85,7 +88,7 @@
         //     key3: "val3",
         //     key4: "val4"
         // };
-        //
+
         // $.each($M("span"), function(el, i){
         //     console.log(i, this);
         // });
@@ -114,18 +117,18 @@
         // console.log("by tagname", $M("div"), $("div"));
         // console.log("by class", $M(".class-div"), $(".class-div"));
         // console.log("by id", $M("#id-div"), $("#id-div"));
-        //
+
         // $M("div").each(function(){
         //     console.log("---", this);
         // });
-        //
-        // $.each($M("div"), function(el, index){
+
+        // $M.each($M("div"), function(el, index){
         //     console.log("---", this.tagName + " #" + index);
         // });
-        //
+
         // console.log($M("section").html());
         // console.log($M("section").html());
-        //
+
         // console.log("get attr id: ", $M("div").attr("id"));
         // console.log("get attr id: ", $M("div").attr("id", "new-id").attr("id"));
 
@@ -145,7 +148,7 @@
         // console.log($M('body').is('div'));
 
         // console.log($M("body").find("#id-div-2"));
-        //
+
         // console.log($M("meta[name='metro4:init']").attr("content"));
         // console.log($M("meta[name='metro4:locale']").attr("content"));
 
