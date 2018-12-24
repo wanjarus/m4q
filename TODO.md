@@ -1,3 +1,3 @@
-+ [ ] $().parseHTML()
-+ [ ] $().remove()
-+ [ ] $().animate()
++ [ ] $M.Data()
++ [ ] $M(...).data()
++ [ ] $M(...).animate()

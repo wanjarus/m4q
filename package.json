@@ -1,7 +1,7 @@
 {
   "name": "mquery",
   "title": "mQuery",
-  "description": "Metro 4 helper for DOM operations",
+  "description": "Helper for DOM operations",
   "version": "1.0.0",
   "main": "build/mquery.js",
   "homepage": "",
@@ -18,15 +18,25 @@
     "mquery",
     "javascript",
     "browser",
-    "library"
+    "library",
+    "dom"
   ],
   "bugs": {
     "url": "https://github.com/olton/mquery/issues"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "grunt": "^1.0.3"
+  },
   "scripts": {
     "build": "npm install && grunt",
     "start": "grunt watch"
+  },
+  "devDependencies": {
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "load-grunt-tasks": "^4.0.0"
   }
 }
