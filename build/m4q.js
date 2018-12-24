@@ -395,7 +395,8 @@
 	    return m4q.merge([], context.childNodes);
 	};
 	
-m4q.fn.extend({
+
+	m4q.fn.extend({
 	    height: function(value, unit){
 	        return this._size('clientHeight', value, unit);
 	    },
@@ -404,7 +405,8 @@ m4q.fn.extend({
 	        return this._size('clientWidth', value, unit);
 	    }
 	});
-m4q.fn.extend({
+
+	m4q.fn.extend({
 	    find: function(selector){
 	        var i, out = m4q();
 	
@@ -526,7 +528,8 @@ m4q.fn.extend({
 	        return out;
 	    },
 	});
-m4q.fn.extend({
+
+	m4q.fn.extend({
 	    attr: function(name, value){
 	        var el;
 	
