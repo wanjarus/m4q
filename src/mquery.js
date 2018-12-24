@@ -475,7 +475,7 @@
     };
 
     mQuery.init = function(selector, context){
-        var match, singleTag;
+        var parsed, singleTag;
 
         if (!selector) {
             return this;
@@ -495,12 +495,15 @@
                 return mQuery((context ? context : document).createElement(singleTag[1]));
             }
 
-            mQuery().merge(this, mQuery.parseHTML(selector, context));
+            parsed = mQuery.parseHTML(selector, context);
 
-            selector = context ? context.querySelectorAll(selector) : document.querySelectorAll(selector);
+            if (parsed[0].nodeType === 3) {
+                selector = context ? context.querySelectorAll(selector) : document.querySelectorAll(selector);
+                [].push.apply(this, selector);
+            } else {
+                mQuery().merge(this, parsed);
+            }
         }
-
-        [].push.apply(this, selector);
 
         return this;
     };
