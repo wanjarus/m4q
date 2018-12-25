@@ -4,7 +4,7 @@ m4q.fn.extend({
         var el;
 
         if (this.length === 0) {
-            return undefined;
+            return ;
         }
         el = this[0];
         if (!value) {
@@ -16,18 +16,28 @@ m4q.fn.extend({
         return this;
     },
 
-    toggleAttr: function(a, v){
-        return this.each(function(){
-            var el = $(this);
-            if (v !== undefined) {
-                el.attr(a, v);
+    removeAttr: function(name){
+        if (this.length === 0) {
+            return ;
+        }
+        this.items().forEach(function(el){
+            if (el.hasAttribute(name)) el.removeAttribute(name);
+        });
+
+        return this;
+    },
+
+    toggleAttr: function(name, value){
+        if (this.length === 0) {
+            return ;
+        }
+        this.each(function(el){
+            if (value && !el.hasAttribute(name) || !el.getAttribute(name)) {
+                el.setAttribute(name, value);
             } else {
-                if (el.attr(a) !== undefined) {
-                    el.removeAttr(a);
-                } else {
-                    el.attr(a, ""+a);
-                }
+                el.removeAttribute(name);
             }
         });
+        return this;
     }
 });

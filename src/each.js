@@ -7,7 +7,8 @@ m4q.each = function(context, callback){
         });
     } else {
         for(var el in context) {
-            callback.apply(context[el], [el, context[el], index++]);
+            if (context.hasOwnProperty(el))
+                callback.apply(context[el], [context[el], el,  index++]);
         }
     }
 
