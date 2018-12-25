@@ -27,7 +27,3 @@ function isEmptyObject( obj ) {
 function isArrayLike (target){
     return target instanceof Object && 'length' in target;
 }
-
-function acceptData(owner){
-    return owner.nodeType === 1 || owner.nodeType === 9 || !( +owner.nodeType );
-}

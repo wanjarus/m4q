@@ -10,10 +10,15 @@
         <p>This is paragraph</p>
         <span>span</span>
     </div>
+    <div id="data-attr" data-attr="val">div with data attributes</div>
 
     <script src="../build/m4q.js"></script>
     <script>
-        console.log($.dataSet('custom'));
+        var div = $("#data-attr");
+
+        div.data("test", "test-value");
+        console.log(div.data());
+        console.log(div.data("test"));
     </script>
 </body>
 </html>

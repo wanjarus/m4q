@@ -1,7 +1,40 @@
 
+function acceptData(owner){
+    return owner.nodeType === 1 || owner.nodeType === 9 || !( +owner.nodeType );
+}
+
+function getData(data){
+    if (data === "true") return true;
+    if (data === "false") return false;
+    if (data === "null") return null;
+    if (data === +data + "") return +data;
+    if (/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/.test(data)) return JSON.parse(data);
+    return data;
+}
+
+function dataAttr(elem, key, data){
+    var name;
+
+    if ( data === undefined && elem.nodeType === 1 ) {
+        name = "data-" + key.replace( /[A-Z]/g, "-$&" ).toLowerCase();
+        data = elem.getAttribute( name );
+
+        if ( typeof data === "string" ) {
+            try {
+                data = getData( data );
+            } catch ( e ) {}
+
+            dataSet.set( elem, key, data );
+        } else {
+            data = undefined;
+        }
+    }
+    return data;
+}
+
 var Data = function(ns){
     this.expando = "DATASET:UID:" + ns.toUpperCase();
-    // this.expando = "DATASET:UID:" + Data.uid++;
+    Data.uid++;
 };
 
 Data.uid = 1;
@@ -27,6 +60,7 @@ Data.prototype = {
 
     set: function(owner, data, value){
         var prop, cache = this.cache(owner);
+
         if (typeof data === "string") {
             cache[camelCase(data)] = value;
         } else {
@@ -77,6 +111,7 @@ Data.prototype = {
                 delete owner[ this.expando ];
             }
         }
+        return true;
     },
 
     hasData: function(owner){
@@ -88,5 +123,62 @@ Data.prototype = {
 var dataSet = new Data('Internal');
 
 m4q.extend({
-    Data: new Data('m4q')
+    Data: new Data('m4q'),
+
+    hasData: function(elem){
+        return dataSet.hasData(elem);
+    },
+
+    data: function(elem, name, data){
+        return dataSet.access(elem, name, data);
+    },
+
+    removeData: function(elem, name){
+        return dataSet.remove(elem, name);
+    }
+});
+
+m4q.fn.extend({
+    data: function(key, val){
+        var i, name, data,
+            elem = this[ 0 ],
+            attrs = elem && elem.attributes;
+
+        // Gets all values
+        if ( key === undefined ) {
+            if ( this.length ) {
+                data = dataSet.get( elem );
+
+                if ( elem.nodeType === 1) {
+                    i = attrs.length;
+                    while ( i-- ) {
+                        if ( attrs[ i ] ) {
+                            name = attrs[ i ].name;
+                            if ( name.indexOf( "data-" ) === 0 ) {
+                                name = camelCase( name.slice( 5 ) );
+                                dataAttr( elem, name, data[ name ] );
+                            }
+                        }
+                    }
+                }
+            }
+
+            return data;
+        }
+
+        if (val === undefined) {
+            return dataSet.get(elem, key);
+        }
+
+        // Sets multiple values
+        return this.each( function() {
+            dataSet.set( this, key, val );
+        } );
+    },
+
+    removeData: function( key ) {
+        return this.each( function() {
+            dataSet.remove( this, key );
+        } );
+    }
 });
