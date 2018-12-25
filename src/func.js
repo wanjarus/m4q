@@ -7,23 +7,18 @@ function camelCase(string){
 
 function isPlainObject( obj ) {
     var proto;
-
     if ( !obj || toString.call( obj ) !== "[object Object]" ) {
         return false;
     }
-
     proto = obj.prototype !== undefined;
-
     if ( !proto ) {
         return true;
     }
-
     return proto.constructor && typeof proto.constructor === "function";
 }
 
 function isEmptyObject( obj ) {
     for (var name in obj ) {
-        console.log(name);
         if (obj.hasOwnProperty(name)) return false;
     }
     return true;

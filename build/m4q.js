@@ -18,23 +18,18 @@
 	
 	function isPlainObject( obj ) {
 	    var proto;
-	
 	    if ( !obj || toString.call( obj ) !== "[object Object]" ) {
 	        return false;
 	    }
-	
 	    proto = obj.prototype !== undefined;
-	
 	    if ( !proto ) {
 	        return true;
 	    }
-	
 	    return proto.constructor && typeof proto.constructor === "function";
 	}
 	
 	function isEmptyObject( obj ) {
 	    for (var name in obj ) {
-	        console.log(name);
 	        if (obj.hasOwnProperty(name)) return false;
 	    }
 	    return true;
@@ -215,8 +210,9 @@
 	});
 	
 
-	var Data = function(){
-	    this.expando = "DATASET:UID:" + Data.uid++;
+	var Data = function(ns){
+	    this.expando = "DATASET:UID:" + ns.toUpperCase();
+	    // this.expando = "DATASET:UID:" + Data.uid++;
 	};
 	
 	Data.uid = 1;
@@ -300,8 +296,11 @@
 	    }
 	};
 	
-	var userData = new Data();
+	var dataSet = new Data('Internal');
 	
+	m4q.extend({
+	    Data: new Data('m4q')
+	});
 
 	m4q.extend({
 	    merge: function( first, second ) {
@@ -326,7 +325,14 @@
 	    isPlainObject: function(obj){return isPlainObject(obj);},
 	    isEmptyObject: function(obj){return isEmptyObject(obj);},
 	    isArrayLike: function(obj){return isArrayLike(obj);},
-	    acceptData: function(owner){return acceptData(owner);}
+	    acceptData: function(owner){return acceptData(owner);},
+	
+	    dataSet: function(ns){
+	        if (['INTERNAL', 'M4Q'].indexOf(ns.toUpperCase()) > -1) {
+	            throw Error("You can not use reserved name for your dataset");
+	        }
+	        return new Data(ns);
+	    }
 	});
 	
 	

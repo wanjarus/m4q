@@ -1,6 +1,7 @@
 
-var Data = function(){
-    this.expando = "DATASET:UID:" + Data.uid++;
+var Data = function(ns){
+    this.expando = "DATASET:UID:" + ns.toUpperCase();
+    // this.expando = "DATASET:UID:" + Data.uid++;
 };
 
 Data.uid = 1;
@@ -84,4 +85,8 @@ Data.prototype = {
     }
 };
 
-var userData = new Data();
+var dataSet = new Data('Internal');
+
+m4q.extend({
+    Data: new Data('m4q')
+});

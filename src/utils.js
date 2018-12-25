@@ -22,6 +22,13 @@ m4q.extend({
     isPlainObject: function(obj){return isPlainObject(obj);},
     isEmptyObject: function(obj){return isEmptyObject(obj);},
     isArrayLike: function(obj){return isArrayLike(obj);},
-    acceptData: function(owner){return acceptData(owner);}
+    acceptData: function(owner){return acceptData(owner);},
+
+    dataSet: function(ns){
+        if (['INTERNAL', 'M4Q'].indexOf(ns.toUpperCase()) > -1) {
+            throw Error("You can not use reserved name for your dataset");
+        }
+        return new Data(ns);
+    }
 });
 
