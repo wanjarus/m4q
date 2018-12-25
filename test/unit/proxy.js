@@ -1,10 +1,10 @@
-QUnit.module("Proxy tests");
+QUnit.module("Proxy");
 
 QUnit.test("$.proxy()", function(assert){
 
-    var context = "a", proximity_function = function(){
+    var context = "a", proxyFunction = function(){
         return this;
     };
-    $.proxy(proximity_function, context);
-    assert.equal(proximity_function(), "a", "Test passed for $.proxy()");
+
+    assert.equal($.proxy(proxyFunction, context)(), "a", "Test passed for change context");
 });
