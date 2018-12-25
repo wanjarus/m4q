@@ -5,22 +5,16 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>Title</h1>
+    <div style="border: 1px solid red">
+        <p>This is paragraph</p>
+        <span>span</span>
+    </div>
+
     <script src="../build/m4q.js"></script>
     <script>
-        // document.body.setAttribute("data-toggle-test", "test-value");
-        // console.log($("body").attr("data-toggle-test"));
-        // console.log($("body").toggleAttr("data-toggle-test").attr("data-toggle-test"));
-
-        var context = {
-            a: "b"
-        };
-        var proxyFunc = function(){
-            return this;
-        };
-        console.log(proxyFunc());
-        var fn = $.proxy(proxyFunc, context);
-        console.log(fn());
-
+        $("div").outerHeight(300);
+        $("div").outerWidth(300);
     </script>
 </body>
 </html>

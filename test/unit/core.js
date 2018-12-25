@@ -30,8 +30,7 @@ QUnit.test("Query", function(assert){
     assert.equal( $( document ).length, 1, "Correct number of elements generated for $( document )" );
     assert.equal( $( document.body ).length, 1, "Correct number of elements generated for $( document.body )" );
     assert.ok( $( "<div>" ) instanceof m4q, "Test passed for $( '<div>' ) instanceof m4q object" );
-    // assert.equal( $( document.body ).get( 0 ), $( "body" ).get( 0 ), "Test passing an html node to the factory" );
-    // assert.equal( $( "<div>" ).get( 0 ).outerHTML, $( "<div>" ).get( 0 ).outerHTML, "Test passing an html node to the factory" );
+    assert.equal( $( document.body )[0].tagName, $( "body" )[0].tagName, "Test passing an html node to the factory" );
 
     assert.equal( $("<div>").length, 1, "Correct number of elements generated for $('<div>')" );
     assert.equal( $("<div>", {

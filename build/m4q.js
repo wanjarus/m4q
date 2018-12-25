@@ -55,24 +55,6 @@
 	        return this.length === 0 ? undefined : matches.call(this[0], selector);
 	    },
 	
-	    _size: function(property, value, unit){
-	        if (this.length === 0) {
-	            return ;
-	        }
-	
-	        if (!value) {
-	            return this[0][property];
-	        }
-	
-	        if (!unit) {
-	            unit = 'px';
-	        }
-	
-	        this[0].style[property ===  'clientHeight' ? 'height' : 'width'] = parseInt(value)+unit;
-	
-	        return this;
-	    },
-	
 	    _property: function(property, value){
 	        if (this.length === 0) {
 	            return ;
@@ -166,6 +148,78 @@
 	
 	    return target;
 	};
+	
+
+	m4q.each = function(context, callback){
+	    var index = 0;
+	    if (m4q.isArrayLike(context)) {
+	        [].forEach.call(context, function(el) {
+	            callback.apply(el, arguments);
+	        });
+	    } else {
+	        for(var el in context) {
+	            if (context.hasOwnProperty(el))
+	                callback.apply(context[el], [context[el], el,  index++]);
+	        }
+	    }
+	
+	    return context;
+	};
+	
+	m4q.fn.extend({
+	    each: function(callback){
+	        [].forEach.call(this, function(el) {
+	            callback.apply(el, arguments);
+	        });
+	
+	        return this;
+	    }
+	});
+	
+
+	m4q.init = function(selector, context){
+	    var parsed, singleTag, elem;
+	
+	    if (!selector) {
+	        return this;
+	    }
+	
+	    if (selector.nodeType || selector === window) {
+	        this[0] = selector;
+	        this.length = 1;
+	        return this;
+	    }
+	
+	    if (typeof selector === "string") {
+	
+	        selector = selector.trim();
+	
+	        singleTag = regexpSingleTag.exec(selector);
+	
+	        if (singleTag) {
+	            elem = (context && !m4q.isPlainObject(context) ? context : document).createElement(singleTag[1]);
+	            if (m4q.isPlainObject(context)) {
+	                for(var name in context) {
+	                    elem.setAttribute(name, context[name]);
+	                }
+	            }
+	            return m4q(elem);
+	        }
+	
+	        parsed = m4q.parseHTML(selector, context);
+	
+	        if (parsed.length === 1 && parsed[0].nodeType === 3) {
+	            selector = context ? context.querySelectorAll(selector) : document.querySelectorAll(selector);
+	            [].push.apply(this, selector);
+	        } else {
+	            m4q.merge(this, parsed);
+	        }
+	    }
+	
+	    return this;
+	};
+	
+	m4q.init.prototype = m4q.fn;
 	
 
 	m4q.extend({
@@ -388,33 +442,6 @@
 	});
 	
 
-	m4q.each = function(context, callback){
-	    var index = 0;
-	    if (m4q.isArrayLike(context)) {
-	        [].forEach.call(context, function(el) {
-	            callback.apply(el, arguments);
-	        });
-	    } else {
-	        for(var el in context) {
-	            if (context.hasOwnProperty(el))
-	                callback.apply(context[el], [context[el], el,  index++]);
-	        }
-	    }
-	
-	    return context;
-	};
-	
-	m4q.fn.extend({
-	    each: function(callback){
-	        [].forEach.call(this, function(el) {
-	            callback.apply(el, arguments);
-	        });
-	
-	        return this;
-	    }
-	});
-	
-
 	// TODO add scripts support
 	m4q.parseHTML = function(data, context){
 	    var base, singleTag;
@@ -445,12 +472,80 @@
 	
 
 	m4q.fn.extend({
+	    _size: function(property, value, unit){
+	        if (this.length === 0) {
+	            return ;
+	        }
+	
+	        if (!value) {
+	            return this[0][property];
+	        }
+	
+	        if (!unit) {
+	            unit = 'px';
+	        }
+	
+	        this[0].style[property ===  'clientHeight' ? 'height' : 'width'] = parseInt(value)+unit;
+	
+	        return this;
+	    },
+	
 	    height: function(value, unit){
-	        return this._size('clientHeight', value, unit);
+	        return this._size.call(this, 'clientHeight', value, unit);
 	    },
 	
 	    width: function(value, unit){
-	        return this._size('clientWidth', value, unit);
+	        return this._size.call(this, 'clientWidth', value, unit);
+	    },
+	
+	    outerWidth: function(){
+	        var el, size, style, result, value, unit = "px";
+	
+	        if (this.length === 0) {
+	            return ;
+	        }
+	
+	        if (arguments.length > 0) {
+	            value = arguments[0];
+	        }
+	
+	        if (value !== undefined && typeof value !== "boolean") {
+	            if (arguments[1]) {
+	                unit = arguments[1];
+	            }
+	            return this.width(value, unit);
+	        }
+	
+	        el = this[0];
+	        size = el.offsetWidth;
+	        style = getComputedStyle(el);
+	        result = size + parseInt(style.marginLeft) + parseInt(style.marginRight);
+	        return value === true ? result : size;
+	    },
+	
+	    outerHeight: function(){
+	        var el, size, style, result, value, unit = "px";
+	
+	        if (this.length === 0) {
+	            return ;
+	        }
+	
+	        if (arguments.length > 0) {
+	            value = arguments[0];
+	        }
+	
+	        if (value !== undefined && typeof value !== "boolean") {
+	            if (arguments[1]) {
+	                unit = arguments[1];
+	            }
+	            return this.height(value, unit);
+	        }
+	
+	        el = this[0];
+	        size = el.offsetHeight;
+	        style = getComputedStyle(el);
+	        result = size + parseInt(style.marginTop) + parseInt(style.marginBottom);
+	        return value === true ? result : size;
 	    }
 	});
 
@@ -631,51 +726,6 @@
 	        return fn.bind(context);
 	    }
 	});
-	
-
-	m4q.init = function(selector, context){
-	    var parsed, singleTag, elem;
-	
-	    if (!selector) {
-	        return this;
-	    }
-	
-	    if (selector.nodeType || selector === window) {
-	        this[0] = selector;
-	        this.length = 1;
-	        return this;
-	    }
-	
-	    if (typeof selector === "string") {
-	
-	        selector = selector.trim();
-	
-	        singleTag = regexpSingleTag.exec(selector);
-	
-	        if (singleTag) {
-	            elem = (context && !m4q.isPlainObject(context) ? context : document).createElement(singleTag[1]);
-	            if (m4q.isPlainObject(context)) {
-	                for(var name in context) {
-	                    elem.setAttribute(name, context[name]);
-	                }
-	            }
-	            return m4q(elem);
-	        }
-	
-	        parsed = m4q.parseHTML(selector, context);
-	
-	        if (parsed.length === 1 && parsed[0].nodeType === 3) {
-	            selector = context ? context.querySelectorAll(selector) : document.querySelectorAll(selector);
-	            [].push.apply(this, selector);
-	        } else {
-	            m4q.merge(this, parsed);
-	        }
-	    }
-	
-	    return this;
-	};
-	
-	m4q.init.prototype = m4q.fn;
 	
 
 	window.m4q = window.$M = window.$ = m4q;

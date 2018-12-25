@@ -44,24 +44,6 @@ m4q.fn = m4q.prototype = {
         return this.length === 0 ? undefined : matches.call(this[0], selector);
     },
 
-    _size: function(property, value, unit){
-        if (this.length === 0) {
-            return ;
-        }
-
-        if (!value) {
-            return this[0][property];
-        }
-
-        if (!unit) {
-            unit = 'px';
-        }
-
-        this[0].style[property ===  'clientHeight' ? 'height' : 'width'] = parseInt(value)+unit;
-
-        return this;
-    },
-
     _property: function(property, value){
         if (this.length === 0) {
             return ;
