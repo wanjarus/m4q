@@ -4,7 +4,9 @@ m4q.extend({
         if (typeof fn !== "function") {
             return ;
         }
-        console.log(context);
-        fn.bind(context);
+        if (!context) {
+            context = this;
+        }
+        return fn.bind(context);
     }
 });

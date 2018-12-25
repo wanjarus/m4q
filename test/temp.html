@@ -11,13 +11,16 @@
         // console.log($("body").attr("data-toggle-test"));
         // console.log($("body").toggleAttr("data-toggle-test").attr("data-toggle-test"));
 
+        var context = {
+            a: "b"
+        };
         var proxyFunc = function(){
             return this;
         };
-
-        $.proxy(proxyFunc, document);
-
         console.log(proxyFunc());
+        var fn = $.proxy(proxyFunc, context);
+        console.log(fn());
+
     </script>
 </body>
 </html>

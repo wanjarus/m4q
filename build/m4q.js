@@ -260,13 +260,13 @@
 	    }
 	});
 	
-	m4q.each(( "blur focus focusin focusout resize scroll click dblclick " +
-	    "mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
-	    "change select submit keydown keypress keyup contextmenu" ).split( " " ),
-	    function( i, name ) {
+	( "blur focus resize scroll click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu" )
+	    .split( " " )
+	    .forEach(
+	    function( name ) {
 	        m4q.fn[ name ] = function( data, fn ) {
 	            return arguments.length > 0 ?
-	                this.on( name, null, data, fn ) :
+	                this.on( name, data, fn ) :
 	                this.trigger( name );
 	        };
 	});
@@ -625,8 +625,10 @@
 	        if (typeof fn !== "function") {
 	            return ;
 	        }
-	        console.log(context);
-	        fn.bind(context);
+	        if (!context) {
+	            context = this;
+	        }
+	        return fn.bind(context);
 	    }
 	});
 	
