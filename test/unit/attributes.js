@@ -10,4 +10,7 @@ QUnit.test("attr()", function(assert){
     assert.equal($("body").attr("data-test"), $(document.body).attr("data-test"), "Test passed for gets attribute $('body').attr() === $(document.body).attr()");
 
     assert.equal($("body").attr("data-test", "test-value").attr("data-test"), "test-value", "Test passed for set/get attribute");
+
+    document.body.setAttribute("data-toggle-test", "test-value");
+    assert.equal($("body").toggleAttr("data-toggle-test").attr("data-toggle-test"), null, "Test passed for toggle attribute");
 });
