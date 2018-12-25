@@ -129,7 +129,7 @@ m4q.fn = m4q.prototype = {
 };
 
 m4q.extend = m4q.fn.extend = function(){
-    var options, name, copy,
+    var options, name,
         target = arguments[ 0 ] || {},
         i = 1,
         length = arguments.length;
@@ -148,59 +148,10 @@ m4q.extend = m4q.fn.extend = function(){
         if ( ( options = arguments[ i ] ) != null ) {
 
             for ( name in options ) {
-                target[ name ] = options[ name ];
+                if (options.hasOwnProperty(name)) target[ name ] = options[ name ];
             }
         }
     }
 
     return target;
-};
-
-m4q.merge = function( first, second ) {
-    var len = +second.length,
-        j = 0,
-        i = first.length;
-
-    for ( ; j < len; j++ ) {
-        first[ i++ ] = second[ j ];
-    }
-
-    first.length = i;
-
-    return first;
-};
-
-m4q.isArrayLike = function(target){
-    return target instanceof Object && 'length' in target;
-};
-
-m4q.type = function(obj){
-    return Object.prototype.toString.call(obj).replace(/^\[object (.+)]$/, '$1').toLowerCase();
-};
-
-m4q.isEmptyObject = function( obj ) {
-    for (var name in obj ) {
-        return false;
-    }
-    return true;
-};
-
-m4q.isPlainObject = function( obj ) {
-    var proto;
-
-    if ( !obj || toString.call( obj ) !== "[object Object]" ) {
-        return false;
-    }
-
-    proto = obj.prototype !== undefined;
-
-    if ( !proto ) {
-        return true;
-    }
-
-    return proto.constructor && typeof proto.constructor === "function";
-};
-
-m4q.proxy = function(fn, context){
-    fn.bind(context);
 };

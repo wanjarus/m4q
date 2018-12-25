@@ -33,7 +33,8 @@ module.exports = function(grunt) {
                 },
                 src: [
                     'src/mode.js',
-                    'src/m4q.js',
+                    'src/core.js',
+                    'src/utils.js',
                     'src/events.js',
                     'src/html.js',
                     'src/ajax.js',
@@ -43,6 +44,7 @@ module.exports = function(grunt) {
                     'src/size.js',
                     'src/search.js',
                     'src/attr.js',
+                    'src/proxy.js',
                     'src/init.js',
                     'src/populate.js'
                 ],
