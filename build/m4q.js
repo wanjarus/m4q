@@ -260,6 +260,23 @@
 	    }
 	});
 	
+	m4q.each(( "blur focus focusin focusout resize scroll click dblclick " +
+	    "mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
+	    "change select submit keydown keypress keyup contextmenu" ).split( " " ),
+	    function( i, name ) {
+	        m4q.fn[ name ] = function( data, fn ) {
+	            return arguments.length > 0 ?
+	                this.on( name, null, data, fn ) :
+	                this.trigger( name );
+	        };
+	});
+	
+	m4q.fn.extend( {
+	    hover: function( fnOver, fnOut ) {
+	        return this.mouseenter( fnOver ).mouseleave( fnOut || fnOver );
+	    }
+	});
+	
 	m4q.ready = function(fn){
 	    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
 	        fn();
@@ -605,6 +622,10 @@
 
 	m4q.extend({
 	    proxy: function(fn, context){
+	        if (typeof fn !== "function") {
+	            return ;
+	        }
+	        console.log(context);
 	        fn.bind(context);
 	    }
 	});

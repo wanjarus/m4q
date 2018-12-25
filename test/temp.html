@@ -7,9 +7,17 @@
 <body>
     <script src="../build/m4q.js"></script>
     <script>
-        document.body.setAttribute("data-toggle-test", "test-value");
-        console.log($("body").attr("data-toggle-test"));
-        console.log($("body").toggleAttr("data-toggle-test").attr("data-toggle-test"));
+        // document.body.setAttribute("data-toggle-test", "test-value");
+        // console.log($("body").attr("data-toggle-test"));
+        // console.log($("body").toggleAttr("data-toggle-test").attr("data-toggle-test"));
+
+        var proxyFunc = function(){
+            return this;
+        };
+
+        $.proxy(proxyFunc, document);
+
+        console.log(proxyFunc());
     </script>
 </body>
 </html>
