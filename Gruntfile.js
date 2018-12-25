@@ -33,19 +33,21 @@ module.exports = function(grunt) {
                 },
                 src: [
                     'src/mode.js',
+                    'src/func.js',
                     'src/core.js',
                     'src/each.js',
-                    'src/init.js',
+                    'src/data.js',
                     'src/utils.js',
                     'src/events.js',
                     'src/html.js',
                     'src/ajax.js',
                     'src/css.js',
-                    'src/parseHTML.js',
+                    'src/parser.js',
                     'src/size.js',
                     'src/search.js',
                     'src/attr.js',
                     'src/proxy.js',
+                    'src/init.js',
                     'src/populate.js'
                 ],
                 dest: 'build/m4q.js'

@@ -19,8 +19,8 @@ m4q.init = function(selector, context){
         singleTag = regexpSingleTag.exec(selector);
 
         if (singleTag) {
-            elem = (context && !m4q.isPlainObject(context) ? context : document).createElement(singleTag[1]);
-            if (m4q.isPlainObject(context)) {
+            elem = (context && !isPlainObject(context) ? context : document).createElement(singleTag[1]);
+            if (isPlainObject(context)) {
                 for(var name in context) {
                     elem.setAttribute(name, context[name]);
                 }

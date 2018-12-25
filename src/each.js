@@ -1,7 +1,7 @@
 
 m4q.each = function(context, callback){
     var index = 0;
-    if (m4q.isArrayLike(context)) {
+    if (isArrayLike(context)) {
         [].forEach.call(context, function(el) {
             callback.apply(el, arguments);
         });
