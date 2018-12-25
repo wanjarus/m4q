@@ -1,12 +1,12 @@
 
 m4q.init = function(selector, context){
-    var parsed, singleTag;
+    var parsed, singleTag, elem;
 
     if (!selector) {
         return this;
     }
 
-    if (selector.nodeType) {
+    if (selector.nodeType || selector === window) {
         this[0] = selector;
         this.length = 1;
         return this;
@@ -14,10 +14,18 @@ m4q.init = function(selector, context){
 
     if (typeof selector === "string") {
 
+        selector = selector.trim();
+
         singleTag = regexpSingleTag.exec(selector);
 
         if (singleTag) {
-            return m4q((context ? context : document).createElement(singleTag[1]));
+            elem = (context && !m4q.isPlainObject(context) ? context : document).createElement(singleTag[1]);
+            if (m4q.isPlainObject(context)) {
+                for(var name in context) {
+                    elem.setAttribute(name, context[name]);
+                }
+            }
+            return m4q(elem);
         }
 
         parsed = m4q.parseHTML(selector, context);

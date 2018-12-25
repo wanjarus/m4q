@@ -188,6 +188,33 @@
 	m4q.type = function(obj){
 	    return Object.prototype.toString.call(obj).replace(/^\[object (.+)]$/, '$1').toLowerCase();
 	};
+	
+	m4q.isEmptyObject = function( obj ) {
+	    for (var name in obj ) {
+	        return false;
+	    }
+	    return true;
+	};
+	
+	m4q.isPlainObject = function( obj ) {
+	    var proto;
+	
+	    if ( !obj || toString.call( obj ) !== "[object Object]" ) {
+	        return false;
+	    }
+	
+	    proto = obj.prototype !== undefined;
+	
+	    if ( !proto ) {
+	        return true;
+	    }
+	
+	    return proto.constructor && typeof proto.constructor === "function";
+	};
+	
+	m4q.proxy = function(fn, context){
+	    fn.bind(context);
+	};
 
 	m4q.fn.extend({
 	    on: function(event, selector, handler){
@@ -565,13 +592,13 @@
 	});
 
 	m4q.init = function(selector, context){
-	    var parsed, singleTag;
+	    var parsed, singleTag, elem;
 	
 	    if (!selector) {
 	        return this;
 	    }
 	
-	    if (selector.nodeType) {
+	    if (selector.nodeType || selector === window) {
 	        this[0] = selector;
 	        this.length = 1;
 	        return this;
@@ -579,10 +606,18 @@
 	
 	    if (typeof selector === "string") {
 	
+	        selector = selector.trim();
+	
 	        singleTag = regexpSingleTag.exec(selector);
 	
 	        if (singleTag) {
-	            return m4q((context ? context : document).createElement(singleTag[1]));
+	            elem = (context && !m4q.isPlainObject(context) ? context : document).createElement(singleTag[1]);
+	            if (m4q.isPlainObject(context)) {
+	                for(var name in context) {
+	                    elem.setAttribute(name, context[name]);
+	                }
+	            }
+	            return m4q(elem);
 	        }
 	
 	        parsed = m4q.parseHTML(selector, context);
@@ -601,7 +636,7 @@
 	m4q.init.prototype = m4q.fn;
 	
 
-	window.m4q = window.$M = m4q;
+	window.m4q = window.$M = window.$ = m4q;
 	
 	return m4q; 
 })();

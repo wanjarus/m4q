@@ -177,3 +177,30 @@ m4q.isArrayLike = function(target){
 m4q.type = function(obj){
     return Object.prototype.toString.call(obj).replace(/^\[object (.+)]$/, '$1').toLowerCase();
 };
+
+m4q.isEmptyObject = function( obj ) {
+    for (var name in obj ) {
+        return false;
+    }
+    return true;
+};
+
+m4q.isPlainObject = function( obj ) {
+    var proto;
+
+    if ( !obj || toString.call( obj ) !== "[object Object]" ) {
+        return false;
+    }
+
+    proto = obj.prototype !== undefined;
+
+    if ( !proto ) {
+        return true;
+    }
+
+    return proto.constructor && typeof proto.constructor === "function";
+};
+
+m4q.proxy = function(fn, context){
+    fn.bind(context);
+};

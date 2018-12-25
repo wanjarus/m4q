@@ -1,2 +1,2 @@
 
-window.m4q = window.$M = m4q;
+window.m4q = window.$M = window.$ = m4q;
