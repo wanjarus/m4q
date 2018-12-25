@@ -16,9 +16,9 @@
     <script>
         var div = $("#data-attr");
 
-        div.data("test", "test-value");
+        $.data(div[0], "role", "---");
         console.log(div.data());
-        console.log(div.data("test"));
+        console.log(typeof div.data("role") === "object");
     </script>
 </body>
 </html>
