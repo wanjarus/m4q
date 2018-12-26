@@ -11,14 +11,20 @@
         <span>span</span>
     </div>
     <div id="data-attr" data-attr="val">div with data attributes</div>
+    <form>
+        <label>Label</label>
+        <input id="input1" value="123">
+        <input id="input2" value="123">
+    </form>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="../build/m4q.js"></script>
     <script>
-        var div = $("#data-attr");
-
-        $.data(div[0], "role", "---");
-        console.log(div.data());
-        console.log(typeof div.data("role") === "object");
+        jQuery.noConflict();
+        console.log(jQuery( document.body ).get( 0 ));
+        console.log($( document.body ).get( 0 ));
+        console.log(jQuery( document.body ).get( 0 ) == jQuery( "body" ).get( 0 ));
+        console.log($( document.body ).get( 0 ) == $( "body" ).get( 0 ));
     </script>
 </body>
 </html>

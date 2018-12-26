@@ -1,17 +1,17 @@
 
 m4q.fn.extend({
     attr: function(name, value){
-        var el;
-
         if (this.length === 0) {
             return ;
         }
-        el = this[0];
+
         if (!value) {
-            return el.getAttribute(name);
+            return this[0].getAttribute(name);
         }
 
-        el.setAttribute(name, value);
+        this.each(function(el){
+            el.setAttribute(name, value);
+        });
 
         return this;
     },
@@ -20,7 +20,7 @@ m4q.fn.extend({
         if (this.length === 0) {
             return ;
         }
-        this.items().forEach(function(el){
+        this.each(function(el){
             if (el.hasAttribute(name)) el.removeAttribute(name);
         });
 

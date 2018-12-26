@@ -6,7 +6,7 @@ QUnit.test("Populating", function(assert){
     assert.ok($, "$ present");
 });
 
-QUnit.test("Query", function(assert){
+QUnit.test("Constructor", function(assert){
     var elem;
 
     assert.equal($().length, 0, "Length must be zero if no arguments $( )");
@@ -30,6 +30,7 @@ QUnit.test("Query", function(assert){
     assert.equal( $( document ).length, 1, "Correct number of elements generated for $( document )" );
     assert.equal( $( document.body ).length, 1, "Correct number of elements generated for $( document.body )" );
     assert.ok( $( "<div>" ) instanceof m4q, "Test passed for $( '<div>' ) instanceof m4q object" );
+    assert.equal( $( document.body ).get( 0 ), $( "body" ).get( 0 ), "Test passing an html node to the factory" );
     assert.equal( $( document.body )[0].tagName, $( "body" )[0].tagName, "Test passing an html node to the factory" );
 
     assert.equal( $("<div>").length, 1, "Correct number of elements generated for $('<div>')" );

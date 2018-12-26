@@ -70,10 +70,9 @@
 	    },
 	
 	    get: function(index){
-	        if (!index) {
+	        if (index === undefined) {
 	            return this.items();
 	        }
-	
 	        return index < 0 ? this[ index + this.length ] : this[ index ];
 	    },
 	
@@ -93,7 +92,9 @@
 	            return this[0][property];
 	        }
 	
-	        this[0][property] = value;
+	        this.each(function(el){
+	            el[property] = value;
+	        });
 	
 	        return this;
 	    },
@@ -103,7 +104,11 @@
 	            return ;
 	        }
 	
-	        return this[0].innerHTML === "";
+	        this.each(function(el){
+	            el.innerHTML = "";
+	        });
+	
+	        return this;
 	    },
 	
 	    filter: function(filterFunc){
@@ -111,21 +116,7 @@
 	    },
 	
 	    val: function(value){
-	        if (this.length === 0) {
-	            return ;
-	        }
-	
-	        if (!value) {
-	            return this[0].value;
-	        }
-	
-	        this.items().forEach(function(el){
-	            if (el.value) {
-	                el.value = value;
-	            }
-	        });
-	
-	        return this;
+	        return this._property("value", value);
 	    },
 	
 	    remove: function(selector){
@@ -556,21 +547,26 @@
 
 	m4q.fn.extend({
 	    css: function(o, v){
-	        var i, win, el;
+	        var win;
 	
-	        for(i = 0; i < this.length; i++) {
-	            el = this[i];
+	        if (this.length === 0) {
+	            return ;
+	        }
+	
+	        if (typeof o === "string" && !v) {
+	            win = this[0].ownerDocument.defaultView;
+	            return  this[0].style[o] ?  this[0].style[o] : win.getComputedStyle(this[0], null)[o];
+	        }
+	
+	        this.each(function(el){
 	            if (typeof o === "object") {
 	                for (var key in o) {
 	                    el.style[key] = o[key];
 	                }
-	            } else if (typeof o === "string" && v !== undefined) {
+	            } else if (typeof o === "string") {
 	                el.style[o] = v;
-	            } else if (typeof o === "string" && !v) {
-	                win = el.ownerDocument.defaultView;
-	                return  el.style[o] ?  el.style[o] : win.getComputedStyle(el, null)[o];
 	            }
-	        }
+	        });
 	
 	        return this;
 	    },
@@ -589,9 +585,10 @@
 	
 	['add', 'remove', 'toggle', 'contains'].forEach(function (method) {
 	    m4q.fn[method + "Class"] = function(cls){
-	        for(var i = 0 ; i < this.length; i++) {
-	            this[i].classList[method](cls);
-	        }
+	        this.each(function(el){
+	            el.classList[method](cls);
+	        });
+	
 	        return this;
 	    }
 	});
@@ -829,17 +826,17 @@
 
 	m4q.fn.extend({
 	    attr: function(name, value){
-	        var el;
-	
 	        if (this.length === 0) {
 	            return ;
 	        }
-	        el = this[0];
+	
 	        if (!value) {
-	            return el.getAttribute(name);
+	            return this[0].getAttribute(name);
 	        }
 	
-	        el.setAttribute(name, value);
+	        this.each(function(el){
+	            el.setAttribute(name, value);
+	        });
 	
 	        return this;
 	    },
@@ -848,7 +845,7 @@
 	        if (this.length === 0) {
 	            return ;
 	        }
-	        this.items().forEach(function(el){
+	        this.each(function(el){
 	            if (el.hasAttribute(name)) el.removeAttribute(name);
 	        });
 	

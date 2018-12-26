@@ -1,21 +1,26 @@
 
 m4q.fn.extend({
     css: function(o, v){
-        var i, win, el;
+        var win;
 
-        for(i = 0; i < this.length; i++) {
-            el = this[i];
+        if (this.length === 0) {
+            return ;
+        }
+
+        if (typeof o === "string" && !v) {
+            win = this[0].ownerDocument.defaultView;
+            return  this[0].style[o] ?  this[0].style[o] : win.getComputedStyle(this[0], null)[o];
+        }
+
+        this.each(function(el){
             if (typeof o === "object") {
                 for (var key in o) {
                     el.style[key] = o[key];
                 }
-            } else if (typeof o === "string" && v !== undefined) {
+            } else if (typeof o === "string") {
                 el.style[o] = v;
-            } else if (typeof o === "string" && !v) {
-                win = el.ownerDocument.defaultView;
-                return  el.style[o] ?  el.style[o] : win.getComputedStyle(el, null)[o];
             }
-        }
+        });
 
         return this;
     },
@@ -34,9 +39,10 @@ m4q.fn.extend({
 
 ['add', 'remove', 'toggle', 'contains'].forEach(function (method) {
     m4q.fn[method + "Class"] = function(cls){
-        for(var i = 0 ; i < this.length; i++) {
-            this[i].classList[method](cls);
-        }
+        this.each(function(el){
+            el.classList[method](cls);
+        });
+
         return this;
     }
 });

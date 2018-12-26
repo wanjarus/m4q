@@ -29,10 +29,9 @@ m4q.fn = m4q.prototype = {
     },
 
     get: function(index){
-        if (!index) {
+        if (index === undefined) {
             return this.items();
         }
-
         return index < 0 ? this[ index + this.length ] : this[ index ];
     },
 
@@ -52,7 +51,9 @@ m4q.fn = m4q.prototype = {
             return this[0][property];
         }
 
-        this[0][property] = value;
+        this.each(function(el){
+            el[property] = value;
+        });
 
         return this;
     },
@@ -62,7 +63,11 @@ m4q.fn = m4q.prototype = {
             return ;
         }
 
-        return this[0].innerHTML === "";
+        this.each(function(el){
+            el.innerHTML = "";
+        });
+
+        return this;
     },
 
     filter: function(filterFunc){
@@ -70,21 +75,7 @@ m4q.fn = m4q.prototype = {
     },
 
     val: function(value){
-        if (this.length === 0) {
-            return ;
-        }
-
-        if (!value) {
-            return this[0].value;
-        }
-
-        this.items().forEach(function(el){
-            if (el.value) {
-                el.value = value;
-            }
-        });
-
-        return this;
+        return this._property("value", value);
     },
 
     remove: function(selector){
