@@ -75,6 +75,12 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$(...).removeAttr(name)` - remove attribute 
 - `$(...).toggleAttr(name, value)` - remove attribute if exists, else set attribute 
 
+#### Manipulation
+= `$(...).append(elements)`
+= `$(...).appendTo(elements)`
+= `$(...).after(html_string)`
+= `$(...).begore(html_string)`
+
 #### Events
 - `$(...).on(event, selector, handler)`
 - `$(...).off(event, selector)`
