@@ -97,3 +97,9 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$.patch(url, data, success, error, dataType)` - alias for `$.ajax` for `PATCH` method
 
 #### Data
+- `$.hasData(el)`
+- `$.data(el, name, data)`
+- `$.removeData(el, name)`
+- `$(...).data()`
+- `$(...).data(key, value)`
+- `$(...).removeData(key)`
