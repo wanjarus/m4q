@@ -21,14 +21,14 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$()` - short alias can be canceled via `m4q.noConflict()`
 
 #### Constructor
-- `$("div")` - select by tag name
-- `$(".div")` - select by class name
-- `$("#div")` - select by id
-- `$("<div>")` - create by tag name
-- `$("<div>any_text_or_html</div>")` - create by html
-- `$("<div>...</div><div>...</div>")` - create by tags
+- `$("div")` - select by `tag name`
+- `$(".div")` - select by `class name`
+- `$("#div")` - select by `id`
+- `$("<div>")` - create by `tag name`
+- `$("<div>any_text_or_html</div>")` - create by `html`
+- `$("<div>...</div><div>...</div>")` - create by `tags`
 - `$("<div>", {...})` - create by tag with attributes as object
-- `$($(...))` - create by m4q as argument
+- `$($(...))` - create by `m4q` as argument
 
 #### Finding
 - `$(...).get(index)`
