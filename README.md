@@ -25,6 +25,7 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$(".div")` - select by `class name`
 - `$("#div")` - select by `id`
 - `$("<div>")` - create by `tag name`
+- `$("<div>", context)` - create in context
 - `$("<div>any_text_or_html</div>")` - create by `html`
 - `$("<div>...</div><div>...</div>")` - create by `tags`
 - `$("<div>", {...})` - create by tag with attributes as object
