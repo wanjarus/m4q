@@ -78,22 +78,29 @@ m4q.fn = m4q.prototype = {
         return this._property("value", value);
     },
 
-    remove: function(selector){
-        var i = 0, node, out = [];
-
-        if (this.length === 0) {
-            return ;
-        }
-
-        for ( ; ( node = this[ i ] ) != null; i++ ) {
-            if (node.parentNode) {
-                out.push(node.parentNode.removeChild(node));
+    hide: function(){
+        return this.each(function(el){
+            if (!!el.style.display) {
+                m4q(el).data('display', el.style.display);
             }
-        }
+            el.style.display = 'none';
+        });
+    },
 
-        return selector ? out.filter(function(el){
-            return matches.call(el, selector);
-        }) : out;
+    show: function(){
+        return this.each(function(el){
+            var display = m4q(el).data('display');
+            el.style.display = display ? display : '';
+        });
+    },
+
+    visible: function(mode){
+        if (mode === undefined) {
+            mode = true;
+        }
+        return this.each(function(el){
+            el.style.visibility = mode ? 'visible' : 'hidden';
+        });
     },
 
     push: [].push,

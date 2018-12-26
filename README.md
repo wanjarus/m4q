@@ -31,6 +31,11 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$("<div>", {...})` - create by tag with attributes as object
 - `$($(...))` - create by `m4q` as argument
 
+#### Visibility
+- `$(...).hide()` - hide elements (used `dispaly`)
+- `$(...).show()` - show element (used `dispaly`)
+- `$(...).visible(true|false)` - set elements visible or invisible  (used `visibility`)
+
 #### Finding
 - `$(...).get(index)`
 - `$(...).contains(selector)`
@@ -97,6 +102,7 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$(...).keypress(selector, handler)`
 - `$(...).keyup(selector, handler)`
 - `$(...).contextmenu(selector, handler)`
+- `$(...).load(selector, handler)`
 
 #### Ajax
 - `$.ajax({...})`

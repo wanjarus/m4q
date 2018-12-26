@@ -42,7 +42,7 @@ m4q.fn.extend({
     }
 });
 
-( "blur focus resize scroll click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu" )
+( "blur focus resize scroll click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu load" )
     .split( " " )
     .forEach(
     function( name ) {
