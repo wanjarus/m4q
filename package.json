@@ -28,7 +28,8 @@
   "dependencies": {},
   "scripts": {
     "build": "npm install && grunt",
-    "start": "grunt watch"
+    "start": "grunt watch",
+    "test": "node-qunit-phantomjs ./test/qunit.html"
   },
   "devDependencies": {
     "grunt": "^1.0.3",
