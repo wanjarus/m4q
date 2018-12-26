@@ -1,11 +1,20 @@
 
 m4q.fn.extend({
     append: function(elements){
-
+        return this.each(function(el){
+            m4q.each(elements, function(element){
+                el.appendChild(element);
+            });
+        })
     },
 
     appendTo: function(elements){
-
+        m4q.each(elements, function(element){
+            this.each(function(el){
+                element.appendChild(el);
+            });
+        });
+        return this;
     },
 
     prepend: function(elements){
@@ -24,12 +33,16 @@ m4q.fn.extend({
 
     },
 
-    after: function(){
-
+    after: function(html){
+        return this.each(function(el){
+            el.insertAdjacentHTML('afterend', html);
+        })
     },
 
-    before: function(){
-
+    before: function(html){
+        return this.each(function(el){
+            el.insertAdjacentHTML('beforebegin', html);
+        })
     },
 
     remove: function(selector){
