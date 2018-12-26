@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Title</title>
 </head>
 <body>
@@ -21,10 +22,10 @@
     <script src="../build/m4q.js"></script>
     <script>
         jQuery.noConflict();
-        console.log(jQuery( document.body ).get( 0 ));
-        console.log($( document.body ).get( 0 ));
-        console.log(jQuery( document.body ).get( 0 ) == jQuery( "body" ).get( 0 ));
-        console.log($( document.body ).get( 0 ) == $( "body" ).get( 0 ));
+
+        console.log("+++", $( "<div>" ));
+        console.log($( "<div>" ) instanceof m4q);
+        console.log($( "<div>" ) instanceof jQuery);
     </script>
 </body>
 </html>

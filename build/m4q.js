@@ -18,7 +18,7 @@
 	
 	function isPlainObject( obj ) {
 	    var proto;
-	    if ( !obj || toString.call( obj ) !== "[object Object]" ) {
+	    if ( !obj || Object.prototype.toString.call( obj ) !== "[object Object]" ) {
 	        return false;
 	    }
 	    proto = obj.prototype !== undefined;
@@ -592,30 +592,51 @@
 
 	// TODO add scripts support
 	m4q.parseHTML = function(data, context){
-	    var base, singleTag;
+	    var base, singleTag, result = [], ctx, _context;
 	
 	    if (typeof data !== "string") {
 	        return [];
 	    }
 	
+	    data = data.trim();
+	
 	    if (!context) {
-	        context = document.implementation.createHTMLDocument();
-	        base = context.createElement( "base" );
+	        ctx = document.implementation.createHTMLDocument("");
+	        base = ctx.createElement( "base" );
 	        base.href = document.location.href;
-	        context.head.appendChild( base );
+	        ctx.head.appendChild( base );
+	        _context = ctx.body;
+	    } else {
+	        if (!isPlainObject(context)) {
+	            _context = context;
+	        } else {
+	            _context = document;
+	        }
 	    }
 	
 	    singleTag = regexpSingleTag.exec(data);
 	
 	    if (singleTag) {
-	        return [context.createElement(singleTag[1])];
+	        result.push(document.createElement(singleTag[1]));
+	    } else {
+	        _context.innerHTML = data;
+	        for(var i = 0; i < _context.childNodes.length; i++) {
+	            result.push(_context.childNodes[i]);
+	        }
 	    }
 	
-	    context = context.body ? context.body : context;
+	    if (context && isPlainObject(context)) {
+	        m4q.each(result,function(el){
+	            for(var name in context) {
+	                if (context.hasOwnProperty(name))
+	                    el.setAttribute(name, context[name]);
+	            }
+	        });
+	    }
 	
-	    context.innerHTML = data;
+	    // console.log("---", data, singleTag, result);
 	
-	    return m4q.merge([], context.childNodes);
+	    return result;
 	};
 	
 
@@ -883,6 +904,10 @@
 	        return this;
 	    }
 	
+	    if (selector === "body") {
+	        selector = document.body;
+	    }
+	
 	    if (selector.nodeType || selector === window) {
 	        this[0] = selector;
 	        this.length = 1;
@@ -893,16 +918,23 @@
 	
 	        selector = selector.trim();
 	
-	        singleTag = regexpSingleTag.exec(selector);
+	        // singleTag = regexpSingleTag.exec(selector);
+	        //
+	        // console.log(selector, singleTag);
+	        //
+	        // if (singleTag) {
+	        //     elem = (context && !isPlainObject(context) ? context : document).createElement(singleTag[1]);
+	        //     if (isPlainObject(context)) {
+	        //         for(var name in context) {
+	        //             if (context.hasOwnProperty(name))
+	        //                 elem.setAttribute(name, context[name]);
+	        //         }
+	        //     }
+	        //     return m4q(elem);
+	        // }
 	
-	        if (singleTag) {
-	            elem = (context && !isPlainObject(context) ? context : document).createElement(singleTag[1]);
-	            if (isPlainObject(context)) {
-	                for(var name in context) {
-	                    elem.setAttribute(name, context[name]);
-	                }
-	            }
-	            return m4q(elem);
+	        if (selector === "#" || selector === ".") {
+	            throw new Error("Selector can't be # or .") ;
 	        }
 	
 	        parsed = m4q.parseHTML(selector, context);

@@ -1,28 +1,49 @@
 
 // TODO add scripts support
 m4q.parseHTML = function(data, context){
-    var base, singleTag;
+    var base, singleTag, result = [], ctx, _context;
 
     if (typeof data !== "string") {
         return [];
     }
 
+    data = data.trim();
+
     if (!context) {
-        context = document.implementation.createHTMLDocument();
-        base = context.createElement( "base" );
+        ctx = document.implementation.createHTMLDocument("");
+        base = ctx.createElement( "base" );
         base.href = document.location.href;
-        context.head.appendChild( base );
+        ctx.head.appendChild( base );
+        _context = ctx.body;
+    } else {
+        if (!isPlainObject(context)) {
+            _context = context;
+        } else {
+            _context = document;
+        }
     }
 
     singleTag = regexpSingleTag.exec(data);
 
     if (singleTag) {
-        return [context.createElement(singleTag[1])];
+        result.push(document.createElement(singleTag[1]));
+    } else {
+        _context.innerHTML = data;
+        for(var i = 0; i < _context.childNodes.length; i++) {
+            result.push(_context.childNodes[i]);
+        }
     }
 
-    context = context.body ? context.body : context;
+    if (context && isPlainObject(context)) {
+        m4q.each(result,function(el){
+            for(var name in context) {
+                if (context.hasOwnProperty(name))
+                    el.setAttribute(name, context[name]);
+            }
+        });
+    }
 
-    context.innerHTML = data;
+    // console.log("---", data, singleTag, result);
 
-    return m4q.merge([], context.childNodes);
+    return result;
 };

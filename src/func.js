@@ -7,7 +7,7 @@ function camelCase(string){
 
 function isPlainObject( obj ) {
     var proto;
-    if ( !obj || toString.call( obj ) !== "[object Object]" ) {
+    if ( !obj || Object.prototype.toString.call( obj ) !== "[object Object]" ) {
         return false;
     }
     proto = obj.prototype !== undefined;

@@ -6,6 +6,10 @@ m4q.init = function(selector, context){
         return this;
     }
 
+    if (selector === "body") {
+        selector = document.body;
+    }
+
     if (selector.nodeType || selector === window) {
         this[0] = selector;
         this.length = 1;
@@ -16,16 +20,23 @@ m4q.init = function(selector, context){
 
         selector = selector.trim();
 
-        singleTag = regexpSingleTag.exec(selector);
+        // singleTag = regexpSingleTag.exec(selector);
+        //
+        // console.log(selector, singleTag);
+        //
+        // if (singleTag) {
+        //     elem = (context && !isPlainObject(context) ? context : document).createElement(singleTag[1]);
+        //     if (isPlainObject(context)) {
+        //         for(var name in context) {
+        //             if (context.hasOwnProperty(name))
+        //                 elem.setAttribute(name, context[name]);
+        //         }
+        //     }
+        //     return m4q(elem);
+        // }
 
-        if (singleTag) {
-            elem = (context && !isPlainObject(context) ? context : document).createElement(singleTag[1]);
-            if (isPlainObject(context)) {
-                for(var name in context) {
-                    elem.setAttribute(name, context[name]);
-                }
-            }
-            return m4q(elem);
+        if (selector === "#" || selector === ".") {
+            throw new Error("Selector can't be # or .") ;
         }
 
         parsed = m4q.parseHTML(selector, context);
