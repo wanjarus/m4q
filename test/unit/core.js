@@ -59,4 +59,12 @@ QUnit.test("Constructor", function(assert){
     /*16*/
     elem = $( "\n\n<em>world</em>" )[ 0 ];
     assert.equal( elem.nodeName.toLowerCase(), "em", "Leading newlines" );
+
+    /*17*/
+    var str_17 = "<div><h1>The title</h1><hr/><p>The paragraph</p></div>";
+    assert.ok( $(str_17).length > 0, "Constructor for complex html <div><h1>The title</h1><hr/><p>The paragraph</p></div>" );
+
+    /*18*/
+    var str_18 = "<div></div><div></div><div></div>";
+    assert.ok( $(str_18).length > 0, "Constructor for complex html three in a row <div></div><div></div><div></div>" );
 });
