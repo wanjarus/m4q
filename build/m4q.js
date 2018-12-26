@@ -5,7 +5,26 @@
  * Licensed under MIT
  */
 
-;(function() {
+( function( global, factory ) {
+
+	"use strict";
+
+	if ( typeof module === "object" && typeof module.exports === "object" ) {
+
+		module.exports = global.document ?
+			factory( global, true ) :
+			function( w ) {
+				if ( !w.document ) {
+					throw new Error( "m4q requires a window with a document" );
+				}
+				return factory( w );
+			};
+	} else {
+		factory( global );
+	}
+
+// Pass this if window is not defined yet
+} )( typeof window !== "undefined" ? window : this, function( window, noGlobal ) {
 
 	"use strict";
 	
@@ -898,7 +917,7 @@
 	
 
 	m4q.init = function(selector, context){
-	    var parsed, singleTag, elem;
+	    var parsed;
 	
 	    if (!selector) {
 	        return this;
@@ -942,11 +961,11 @@
 	
 	m4q.init.prototype = m4q.fn;
 	
-
-	window.m4q = window.$M = window.$ = m4q;
+if (!noGlobal) {
+	    window.m4q = window.$M = window.$ = m4q;
+	}
 	
-	_$ = window.$;
-	_$M = window.$M;
+	var _$ = window.$, _$M = window.$M;
 	
 	m4q.noConflict = function() {
 	    if ( window.$ === m4q ) {window.$ = _$;}
@@ -954,4 +973,4 @@
 	    return m4q;
 	};
 	return m4q; 
-})();
+});

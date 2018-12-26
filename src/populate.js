@@ -1,8 +1,8 @@
+if (!noGlobal) {
+    window.m4q = window.$M = window.$ = m4q;
+}
 
-window.m4q = window.$M = window.$ = m4q;
-
-_$ = window.$;
-_$M = window.$M;
+var _$ = window.$, _$M = window.$M;
 
 m4q.noConflict = function() {
     if ( window.$ === m4q ) {window.$ = _$;}

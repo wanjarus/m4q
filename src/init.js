@@ -1,6 +1,6 @@
 
 m4q.init = function(selector, context){
-    var parsed, singleTag, elem;
+    var parsed;
 
     if (!selector) {
         return this;

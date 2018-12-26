@@ -30,14 +30,64 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$("<div>", {...})` - create by tag with attributes as object
 - `$($(...))` - create by m4q as argument
 
+#### Finding
+- `$(...).get(index)`
+- `$(...).contains(selector)`
+- `$(...).is(selector)`
+- `$(...).find(selector)`
+- `$(...).children(selector)`
+- `$(...).parent(selector)`
+- `$(...).closest(selector)`
+- `$(...).siblings(selector)`
+- `$(...).prev(selector)`
+- `$(...).next(selector)`
+
 #### Html and text
-- `$(..).html()` - get `innerHTML`
-- `$(..).html(value)` - set `innerHTML`
-- `$(..).text()` - get `textContent`
-- `$(..).text(value)` - set `textContent`
-- `$(..).innerText()` - get `innerText`
-- `$(..).innerText(value)` - set `innerText`
-- `$(..).outerHTML()` - get `innerText`
+- `$(...).html()` - get `innerHTML`
+- `$(...).html(value)` - set `innerHTML`
+- `$(...).text()` - get `textContent`
+- `$(...).text(value)` - set `textContent`
+- `$(...).innerText()` - get `innerText`
+- `$(...).innerText(value)` - set `innerText`
+- `$(...).outerHTML()` - get `innerText`
+
+#### CSS and classes
+- `$(...).css(name)`
+- `$(...).css(name, value)`
+- `$(...).css({...})`
+- `$(...).addClass(...)`
+- `$(...).removeClass(...)`
+- `$(...).toggleClass(...)`
+- `$(...).containsClass(...)`
+- `$(...).clearClasses()`
+
+#### Events
+- `$(...).on(event, selector, handler)`
+- `$(...).off(event, selector)`
+- `$(...).trigger(event, data)`
+- `$(...).ready(callback)`
+
+##### Event aliases
+- `$(...).blur(selector, handler)`
+- `$(...).focus(selector, handler)`
+- `$(...).resize(selector, handler)`
+- `$(...).scroll(selector, handler)`
+- `$(...).click(selector, handler)`
+- `$(...).dblclick(selector, handler)`
+- `$(...).mousedown(selector, handler)`
+- `$(...).mouseup(selector, handler)`
+- `$(...).mousemove(selector, handler)`
+- `$(...).mouseover(selector, handler)`
+- `$(...).mouseout(selector, handler)`
+- `$(...).mouseenter(selector, handler)`
+- `$(...).mouseleave(selector, handler)`
+- `$(...).change(selector, handler)`
+- `$(...).select(selector, handler)`
+- `$(...).submit(selector, handler)`
+- `$(...).keydown(selector, handler)`
+- `$(...).keypress(selector, handler)`
+- `$(...).keyup(selector, handler)`
+- `$(...).contextmenu(selector, handler)`
 
 #### Ajax
 - `$.ajax({...})`
@@ -46,4 +96,4 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$.put(url, data, success, error, dataType)` - alias for `$.ajax` for `PUT` method
 - `$.patch(url, data, success, error, dataType)` - alias for `$.ajax` for `PATCH` method
 
-
+#### Data
