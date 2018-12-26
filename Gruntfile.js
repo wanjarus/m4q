@@ -68,6 +68,7 @@ module.exports = function(grunt) {
                     'src/search.js',
                     'src/attr.js',
                     'src/proxy.js',
+                    'src/manipulation.js',
                     'src/init.js',
                     'src/populate.js'
                 ],
