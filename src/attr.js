@@ -5,7 +5,7 @@ m4q.fn.extend({
             return ;
         }
 
-        if (!value) {
+        if (value === undefined) {
             return this[0].getAttribute(name);
         }
 

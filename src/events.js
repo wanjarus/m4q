@@ -20,7 +20,7 @@ m4q.fn.extend({
         if (this.length === 0) {
             return;
         }
-        if (!selector) {
+        if (selector === undefined) {
             this[0].removeEventListener(event);
         } else {
             this.find(selector).off(event);

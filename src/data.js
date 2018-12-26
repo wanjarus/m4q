@@ -144,7 +144,6 @@ m4q.fn.extend({
             elem = this[ 0 ],
             attrs = elem && elem.attributes;
 
-        // Gets all values
         if ( key === undefined ) {
             if ( this.length ) {
                 data = dataSet.get( elem );
@@ -170,7 +169,6 @@ m4q.fn.extend({
             return dataSet.get(elem, key);
         }
 
-        // Sets multiple values
         return this.each( function() {
             dataSet.set( this, key, val );
         } );

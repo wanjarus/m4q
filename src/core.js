@@ -47,7 +47,7 @@ m4q.fn = m4q.prototype = {
         if (this.length === 0) {
             return ;
         }
-        if (!value) {
+        if (value === undefined) {
             return this[0][property];
         }
 
@@ -117,9 +117,7 @@ m4q.extend = m4q.fn.extend = function(){
     }
 
     for ( ; i < length; i++ ) {
-
         if ( ( options = arguments[ i ] ) != null ) {
-
             for ( name in options ) {
                 if (options.hasOwnProperty(name)) target[ name ] = options[ name ];
             }

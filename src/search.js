@@ -119,5 +119,5 @@ m4q.fn.extend({
         });
 
         return out;
-    },
+    }
 });

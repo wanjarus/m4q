@@ -7,7 +7,7 @@ m4q.fn.extend({
             return ;
         }
 
-        if (typeof o === "string" && !v) {
+        if (typeof o === "string" && v === undefined) {
             win = this[0].ownerDocument.defaultView;
             return  this[0].style[o] ?  this[0].style[o] : win.getComputedStyle(this[0], null)[o];
         }

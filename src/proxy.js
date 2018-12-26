@@ -4,7 +4,7 @@ m4q.extend({
         if (typeof fn !== "function") {
             return ;
         }
-        if (!context) {
+        if (context === undefined || context === null) {
             context = this;
         }
         return fn.bind(context);

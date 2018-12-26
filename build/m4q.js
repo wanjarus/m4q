@@ -88,7 +88,7 @@
 	        if (this.length === 0) {
 	            return ;
 	        }
-	        if (!value) {
+	        if (value === undefined) {
 	            return this[0][property];
 	        }
 	
@@ -158,9 +158,7 @@
 	    }
 	
 	    for ( ; i < length; i++ ) {
-	
 	        if ( ( options = arguments[ i ] ) != null ) {
-	
 	            for ( name in options ) {
 	                if (options.hasOwnProperty(name)) target[ name ] = options[ name ];
 	            }
@@ -343,7 +341,6 @@
 	            elem = this[ 0 ],
 	            attrs = elem && elem.attributes;
 	
-	        // Gets all values
 	        if ( key === undefined ) {
 	            if ( this.length ) {
 	                data = dataSet.get( elem );
@@ -369,7 +366,6 @@
 	            return dataSet.get(elem, key);
 	        }
 	
-	        // Sets multiple values
 	        return this.each( function() {
 	            dataSet.set( this, key, val );
 	        } );
@@ -438,7 +434,7 @@
 	        if (this.length === 0) {
 	            return;
 	        }
-	        if (!selector) {
+	        if (selector === undefined) {
 	            this[0].removeEventListener(event);
 	        } else {
 	            this.find(selector).off(event);
@@ -553,7 +549,7 @@
 	            return ;
 	        }
 	
-	        if (typeof o === "string" && !v) {
+	        if (typeof o === "string" && v === undefined) {
 	            win = this[0].ownerDocument.defaultView;
 	            return  this[0].style[o] ?  this[0].style[o] : win.getComputedStyle(this[0], null)[o];
 	        }
@@ -821,7 +817,7 @@
 	        });
 	
 	        return out;
-	    },
+	    }
 	});
 
 	m4q.fn.extend({
@@ -830,7 +826,7 @@
 	            return ;
 	        }
 	
-	        if (!value) {
+	        if (value === undefined) {
 	            return this[0].getAttribute(name);
 	        }
 	
@@ -872,7 +868,7 @@
 	        if (typeof fn !== "function") {
 	            return ;
 	        }
-	        if (!context) {
+	        if (context === undefined || context === null) {
 	            context = this;
 	        }
 	        return fn.bind(context);
