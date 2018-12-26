@@ -16,24 +16,14 @@ m4q.init = function(selector, context){
         return this;
     }
 
+    if (selector instanceof m4q) {
+        m4q.merge(this, selector);
+        return this;
+    }
+
     if (typeof selector === "string") {
 
         selector = selector.trim();
-
-        // singleTag = regexpSingleTag.exec(selector);
-        //
-        // console.log(selector, singleTag);
-        //
-        // if (singleTag) {
-        //     elem = (context && !isPlainObject(context) ? context : document).createElement(singleTag[1]);
-        //     if (isPlainObject(context)) {
-        //         for(var name in context) {
-        //             if (context.hasOwnProperty(name))
-        //                 elem.setAttribute(name, context[name]);
-        //         }
-        //     }
-        //     return m4q(elem);
-        // }
 
         if (selector === "#" || selector === ".") {
             throw new Error("Selector can't be # or .") ;

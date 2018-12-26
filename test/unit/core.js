@@ -67,4 +67,9 @@ QUnit.test("Constructor", function(assert){
     /*18*/
     var str_18 = "<div></div><div></div><div></div>";
     assert.ok( $(str_18).length > 0, "Constructor for complex html three in a row <div></div><div></div><div></div>" );
+
+    /*19*/
+    var div_19 = $("<div></div><div></div><div></div>");
+    assert.equal($(div_19).length, 3, "Test passed for argument instance of m4q");
+
 });
