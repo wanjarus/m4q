@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Title</h1>
+    <h1 class="cls-title" id="h1">Title</h1>
     <div style="border: 1px solid red">
         <p>This is paragraph</p>
         <span>span</span>
@@ -23,8 +23,10 @@
     <script>
         jQuery.noConflict();
 
-        var div = $("<div></div><div></div><div></div>");
-        console.log($(div));
+        $("label").attr({
+            id: "label-id",
+            class: "cls-1 cls-2"
+        })
     </script>
 </body>
 </html>

@@ -62,6 +62,14 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$(...).containsClass(...)`
 - `$(...).clearClasses()`
 
+#### Attributes
+- `$(...).attr()` - get all attributes
+- `$(...).attr(name)` - get attribute by name
+- `$(...).attr(name, value)` - set attribute by name
+- `$(...).attr({...})` - set attributes 
+- `$(...).removeAttr(name)` - remove attribute 
+- `$(...).toggleAttr(name, value)` - remove attribute if exists, else set attribute 
+
 #### Events
 - `$(...).on(event, selector, handler)`
 - `$(...).off(event, selector)`

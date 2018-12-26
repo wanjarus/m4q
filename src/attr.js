@@ -1,17 +1,36 @@
 
 m4q.fn.extend({
     attr: function(name, value){
+        var attributes = {};
+
         if (this.length === 0) {
             return ;
         }
 
-        if (value === undefined) {
+        if (name === undefined && value === undefined) {
+            m4q.each(this[0].attributes, function(a){
+                attributes[a.nodeName] = a.nodeValue;
+            });
+            return attributes;
+        }
+
+        if (name && !isPlainObject(name) && value === undefined) {
             return this[0].getAttribute(name);
         }
 
-        this.each(function(el){
-            el.setAttribute(name, value);
-        });
+        if (isPlainObject(name)) {
+            this.each(function(el){
+                for (var key in name) {
+                    console.log(key, name[key]);
+                    if (name.hasOwnProperty(key))
+                        el.setAttribute(key, name[key]);
+                }
+            });
+        } else {
+            this.each(function(el){
+                el.setAttribute(name, value);
+            });
+        }
 
         return this;
     },
