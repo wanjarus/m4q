@@ -1025,8 +1025,7 @@
 	    }
 	
 	    if (selector instanceof m4q) {
-	        m4q.merge(this, selector);
-	        return this;
+	        return selector;
 	    }
 	
 	    if (typeof selector === "string") {
