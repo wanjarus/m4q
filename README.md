@@ -55,7 +55,7 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$(...).text(value)` - set `textContent`
 - `$(...).innerText()` - get `innerText`
 - `$(...).innerText(value)` - set `innerText`
-- `$(...).outerHTML()` - get `innerText`
+- `$(...).outerHTML()` - get `outerHTML`
 
 #### CSS and classes
 - `$(...).css(name)`
