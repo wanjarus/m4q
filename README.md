@@ -13,7 +13,7 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 [![Known Vulnerabilities](https://snyk.io/test/github/olton/m4q/badge.svg?targetFile=package.json)](https://snyk.io/test/github/olton/m4q?targetFile=package.json)
 [![Maintainability](https://api.codeclimate.com/v1/badges/4201551c70bc4ee030b5/maintainability)](https://codeclimate.com/github/olton/m4q/maintainability)
 
-### Features (already implemented)
+### Features (already implemented) 
 
 #### Population
 - `m4q()` - main
