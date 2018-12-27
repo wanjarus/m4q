@@ -122,5 +122,6 @@ This helper designed for [Metro 4](https://metroui.org.ua) project to replace jQ
 - `$.data(el, name, data)`
 - `$.removeData(el, name)`
 - `$(...).data()`
+- `$(...).data(key)`
 - `$(...).data(key, value)`
 - `$(...).removeData(key)`
