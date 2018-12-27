@@ -28,12 +28,7 @@
     <script>
         jQuery.noConflict();
 
-        console.log(!!document.getElementsByTagName('form')[0].style.display);
-
-        $("form").hide();
-        setTimeout(function(){
-            $("form").show();
-        }, 3000);
+        console.log($("body").attr("fake"));
     </script>
 </body>
 </html>

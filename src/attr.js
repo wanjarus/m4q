@@ -7,11 +7,18 @@ m4q.fn.extend({
             return ;
         }
 
-        if (name === undefined && value === undefined) {
+        if (arguments.length === 0) {
             m4q.each(this[0].attributes, function(a){
                 attributes[a.nodeName] = a.nodeValue;
             });
             return attributes;
+        }
+
+        if (name === undefined) {
+            return undefined;
+        }
+        if (name === null) {
+            return null;
         }
 
         if (name && !isPlainObject(name) && value === undefined) {
@@ -21,7 +28,6 @@ m4q.fn.extend({
         if (isPlainObject(name)) {
             this.each(function(el){
                 for (var key in name) {
-                    console.log(key, name[key]);
                     if (name.hasOwnProperty(key))
                         el.setAttribute(key, name[key]);
                 }
